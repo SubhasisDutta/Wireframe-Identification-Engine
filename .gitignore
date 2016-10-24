@@ -1,3 +1,7 @@
+#Ignore files and folder
+webapp/node_modules
+webapp/public/vendor
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

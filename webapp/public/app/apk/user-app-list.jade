@@ -1,0 +1,35 @@
+.container(ng-hide="identity.isAuthenticated()")
+  .jumbotron
+    h1 Android APK Analysis
+    p Please Log IN to view Android App Analysis Reports.
+.container.top-padding-med(ng-show="identity.isAuthenticated()")
+  .pull-right
+    form.form-inline
+      .form-group
+        input.form-control(ng-model="searchText", placeholder="Filter")
+      .form-group.margin-left-med
+        select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+  table.table.table-hover.table-striped.table-condensed
+    thead
+      tr
+        th Title
+        th Upload Date
+        th Trigger
+        th Static Analysis Report
+        th Smart Input Generation Report
+    tbody
+      tr(ng-repeat="userapp in userApps | filter:searchText | orderBy:sortOrder")
+          td {{userapp.title}}
+          td {{userapp.uploaded_on | date}}
+          td(ng-if="userapp.isSA_done === false || userapp.isSIG_done === false ")
+              button.btn.btn-primary(ng-click="triggerProcess(userapp._id)") Analyze
+          td(ng-if="userapp.isSA_done === true && userapp.isSIG_done === true ")
+          | &nbsp;
+          td(ng-if="userapp.isSA_done === true")
+             a(href="/apps/SAreport/{{userapp._id}}") View
+          td(ng-if="userapp.isSA_done !== true")
+          | &nbsp;
+          td(ng-if="userapp.isSIG_done === true")
+             a(href="/apps/SIGreport/{{userapp._id}}") View
+          td(ng-if="userapp.isSIG_done !== true")
+          | &nbsp;
