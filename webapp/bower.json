@@ -1,20 +1,22 @@
 {
-  "name": "AndroidAPKAnalysis",
-  "version": "0.0.0",
+  "name": "BUILD-WireframeTagging",
+  "version": "0.0.1",
   "authors": [
     "Subhasis Dutta"
   ],
-  "description": "\"Web App to Detect Vulnerability in Android Apps\"",
+  "description": "\"Web App to Enable Identification of User Interface Components in Images\"",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "jquery": "^2.1.1",
     "angular": "^1.2.16",
     "AngularJS-Toaster": "toaster#^1.1.0",
-    "toastr": "~2.0.2",    
+    "toastr": "~2.0.2",
     "angular-resource": "^1.2.16",
     "angular-route": "^1.2.16",
     "bootstrap": "^3.1.1",
-    "angular-mocks": "^1.2.16"
+    "angular-mocks": "^1.2.16",
+    "ng-file-upload": "^12.2.12",
+    "angular-material": "^1.1.1"
   }
 }

@@ -13,10 +13,9 @@ module.exports = function(app, config) {
   }
 
   app.set('views', config.rootPath + '/server/views');
-  app.set('view engine', 'jade');
+  app.set('view engine', 'pug');
   app.use(logger('dev'));
-  app.use(cookieParser());
-  app.use(bodyParser.urlencoded({extended:true}));
+  app.use(cookieParser());  app.use(bodyParser.urlencoded({extended:true}));
   app.use(bodyParser.json());
   app.use(session({secret: 'apk analysis',resave:false,saveUninitialized:false}));
   app.use(passport.initialize());
