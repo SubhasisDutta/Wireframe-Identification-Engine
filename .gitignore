@@ -1,6 +1,7 @@
 #Ignore files and folder
 webapp/node_modules
 webapp/public/vendor
+webapp/.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
