@@ -1,10 +1,18 @@
 .container
   .jumbotron
-    h1 Android APK Analysis
-    p Welcome to Android APK Analysis! The most comprehensive and complete tool for performing static and dynamic analysis of Android Apps.
+    h1 BUILD - Wireframe Identification Engine
+    p
+      | Welcome to BUILD - WIE! This tool is a concept demonstrator on a method to semi-automatically convert a wireframe image
+      | to user interface code. By identifying the different user interface controls using various machine learning techniques
+      | and converting them to usable metadata which can be used by BUILD platform to generate freestyle prototype.
+      | Using this webapp a user can build model by accepting training data and constantly improve the platform by training and testing.
 
-  .row(ng-show="identity.isAuthenticated()")
+  .row
     .col-md-6
-      a.btn.btn-primary(href="/apps",style="width: 100%;margin-bottom: 10px;") See APK Analysis Reports
+      a.btn.btn-primary.home-button(href="/public") Public Pages with Identification Tags
     .col-md-6
-      a.btn.btn-primary(href="/apk/upload",style="width: 100%;margin-bottom: 10px;") Upload APK to Analyze
+      a.btn.btn-primary.home-button(href="/pages") All User Pages with Tags
+    .col-md-6
+      a.btn.btn-primary.home-button(href="/contribute") Contribute Labeled Images and Retrain the Image Identification Model
+    .col-md-6
+      a.btn.btn-primary.home-button(href="/process") Upload an Image Wireframe and Annotate To Identify the Control Properties

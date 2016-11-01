@@ -1,12 +1,12 @@
-angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser) {
+angular.module('app').factory('sdAuth', function($http, sdIdentity, $q, sdUser) {
   return {
     authenticateUser: function(username, password) {
       var dfd = $q.defer();
       $http.post('/login', {username:username, password:password}).then(function(response) {
         if(response.data.success) {
-          var user = new mvUser();
+          var user = new sdUser();
           angular.extend(user, response.data.user);
-          mvIdentity.currentUser = user;
+          sdIdentity.currentUser = user;
           dfd.resolve(true);
         } else {
           dfd.resolve(false);
@@ -16,11 +16,11 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser) 
     },
 
     createUser: function(newUserData) {
-      var newUser = new mvUser(newUserData);
+      var newUser = new sdUser(newUserData);
       var dfd = $q.defer();
 
       newUser.$save().then(function() {
-        mvIdentity.currentUser = newUser;
+        sdIdentity.currentUser = newUser;
         dfd.resolve();
       }, function(response) {
         dfd.reject(response.data.reason);
@@ -32,10 +32,10 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser) 
     updateCurrentUser: function(newUserData) {
       var dfd = $q.defer();
 
-      var clone = angular.copy(mvIdentity.currentUser);
+      var clone = angular.copy(sdIdentity.currentUser);
       angular.extend(clone, newUserData);
       clone.$update().then(function() {
-        mvIdentity.currentUser = clone;
+        sdIdentity.currentUser = clone;
         dfd.resolve();
       }, function(response) {
         dfd.reject(response.data.reason);
@@ -46,13 +46,13 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser) 
     logoutUser: function() {
       var dfd = $q.defer();
       $http.post('/logout', {logout:true}).then(function() {
-        mvIdentity.currentUser = undefined;
+        sdIdentity.currentUser = undefined;
         dfd.resolve();
       });
       return dfd.promise;
     },
     authorizeCurrentUserForRoute: function(role) {
-      if(mvIdentity.isAuthorized(role)) {
+      if(sdIdentity.isAuthorized(role)) {
         return true;
       } else {
         return $q.reject('not authorized');
@@ -60,7 +60,7 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser) 
 
     },
     authorizeAuthenticatedUserForRoute: function() {
-      if(mvIdentity.isAuthenticated()) {
+      if(sdIdentity.isAuthenticated()) {
         return true;
       } else {
         return $q.reject('not authorized');

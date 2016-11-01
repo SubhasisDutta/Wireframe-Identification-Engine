@@ -36,3 +36,7 @@ footer p {
 .container .jumbotron {
   margin-top: 100px;
 }
+.home-button {
+  width: 100%;
+  margin-bottom: 10px;
+}
