@@ -28,14 +28,14 @@ function createDefaultUsers() {
     if(collection.length === 0) {
       var salt, hash;
       salt = encrypt.createSalt();
-      hash = encrypt.hashPwd(salt, 'admin');
-      User.create({firstName:'Admin',lastName:'User',username:'admin@utd.com', salt: salt, hashed_pwd: hash, roles: ['admin']});
-      salt = encrypt.createSalt();
       hash = encrypt.hashPwd(salt, 'subhasis');
-      User.create({firstName:'Subhasis',lastName:'Dutta',username:'subhasis@utd.com', salt: salt, hashed_pwd: hash, roles: []});
+      User.create({firstName:'Subhasis',lastName:'Dutta',username:'subhasis@subhasisdutta.com', salt: salt, hashed_pwd: hash, roles: ['admin']});
       salt = encrypt.createSalt();
-      hash = encrypt.hashPwd(salt, 'john');
-      User.create({firstName:'John',lastName:'Doe',username:'john@utd.com', salt: salt, hashed_pwd: hash});
+      hash = encrypt.hashPwd(salt, 'build');
+      User.create({firstName:'Build',lastName:'User',username:'build.user@build.me', salt: salt, hashed_pwd: hash});
+      salt = encrypt.createSalt();
+      hash = encrypt.hashPwd(salt, 'build');
+      User.create({firstName:'Build',lastName:'Admin',username:'build@build.me', salt: salt, hashed_pwd: hash, roles: ['admin']});
     }
   })
 };
