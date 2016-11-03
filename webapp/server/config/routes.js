@@ -31,7 +31,7 @@ module.exports = function (app) {
     app.post('/api/process/startWireframeAnalysis/:id', auth.requiresApiLogin, processWI.startIdentification);
 
     app.get('/partials/*', function (req, res) {
-        res.render('../../public/app/' + req.params[0]);
+        res.render('../../public/app/modules/' + req.params[0]);
     });
 
     app.post('/login', auth.authenticate);
