@@ -4,7 +4,7 @@
 var _ = require('lodash');
 var fs = require('fs');
 var gulp = require('gulp');
-//var concat = require('gulp-concat');
+var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
@@ -19,10 +19,10 @@ var production = (process.env.NODE_ENV === 'production');
 
 var paths = {
   root: '.',
-  client: 'client/app',
+  client: 'public/app',
   vendor: 'public/vendor',
   dist: 'public/dist',
-  clientBuild: 'client/build'
+  clientBuild: 'public/build'
 };
 
 gulp.task('js-vendor', function () {
@@ -68,6 +68,7 @@ gulp.task('js-vendor', function () {
 });
 
 gulp.task('js-bundle', function () {
+
     gulp.src(['public/app/module.js','public/app/modules/**/*.js','public/app/app.js'])
         .pipe(sourcemaps.init())
         .pipe(concat('bundle.js'))
@@ -105,7 +106,7 @@ function getNPMPackageIds() {
     // read package.json and get dependencies' package ids
     var packageManifest = {};
     try {
-        packageManifest = require('./package.json');
+        packageManifest = require(paths.root + '/package.json');
     } catch (e) {
         // does not have a package.json manifest
     }
