@@ -19,14 +19,14 @@ module.exports = function(config) {
       'public/vendor/angular-resource/angular-resource.js',
       'public/vendor/angular-mocks/angular-mocks.js',
       'test/test-app.js',
-      'public/app/**/*.js',
+      'client/app/**/*.js',
       'test/tests/**/*.js'
     ],
 
 
     // list of files to exclude
     exclude: [
-      'public/app/app.js'
+      'client/app/app.js'
     ],
 
 

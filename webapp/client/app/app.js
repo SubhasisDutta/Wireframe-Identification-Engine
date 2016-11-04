@@ -1,5 +1,3 @@
-angular.module('app', ['ngResource', 'ngRoute','ngFileUpload']);
-
 angular.module('app').config(function($routeProvider, $locationProvider) {
   var routeRoleChecks = {
     admin: {auth: function(sdAuth) {
@@ -8,7 +6,7 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
     user: {auth: function(sdAuth) {
       return sdAuth.authorizeAuthenticatedUserForRoute()
     }}
-  }
+  };
 
   $locationProvider.html5Mode(true);
   $routeProvider
