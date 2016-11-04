@@ -103,7 +103,7 @@ $ sudo npm install -g gulp
 ```
 
 #### Start the Mongo DB Server as per setup and configure it in
-webapp/server/config/config.js
+[webapp/server/config/config.js](webapp/server/config/config.js)
     
 ### Setup and Start the Web App as per steps in 
-https://github.com/SubhasisDutta/WireframeTagging/tree/master/webapp
+[webapp/ReadMe.md](webapp/ReadMe.md)
