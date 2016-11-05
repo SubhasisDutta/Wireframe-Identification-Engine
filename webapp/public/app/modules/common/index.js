@@ -5,7 +5,7 @@
 
 var toastr = require('toastr');
 
-var app = angular.module('app');
+var modu = module.exports = angular.module('modules.common', []);
 
-app.factory('sdNotifier', require('./sdNotifier'));
-app.value('sdToastr', toastr);
+modu.factory('sdNotifier', require('./sdNotifier'));
+modu.value('sdToastr', toastr);

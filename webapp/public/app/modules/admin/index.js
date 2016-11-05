@@ -3,6 +3,6 @@
  */
 'use strict';
 
-var app = angular.module('app');
+var modu = module.exports = angular.module('modules.admin', ['modules.account']);
 
-app.controller('sdUserListCtrl', require('./sdUserListCtrl'));
+modu.controller('sdUserListCtrl', require('./sdUserListCtrl'));

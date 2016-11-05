@@ -3,9 +3,9 @@
  */
 'use strict';
 
-var app = angular.module('app');
+var modu = module.exports = angular.module('modules.process', []);
 
-app.controller('sdProcessAnnotateCtrl', require('./sdProcessAnnotateCtrl'));
-app.controller('sdProcessCropCtrl', require('./sdProcessCropCtrl'));
-app.controller('sdProcessIdentifyCtrl', require('./sdProcessIdentifyCtrl'));
-app.controller('sdProcessUploadCtrl', require('./sdProcessUploadCtrl'));
+modu.controller('sdProcessAnnotateCtrl', require('./sdProcessAnnotateCtrl'));
+modu.controller('sdProcessCropCtrl', require('./sdProcessCropCtrl'));
+modu.controller('sdProcessIdentifyCtrl', require('./sdProcessIdentifyCtrl'));
+modu.controller('sdProcessUploadCtrl', require('./sdProcessUploadCtrl'));

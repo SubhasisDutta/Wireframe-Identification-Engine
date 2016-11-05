@@ -3,6 +3,6 @@
  */
 'use strict';
 
-var app = angular.module('app');
+var modu = module.exports = angular.module('modules.main', ['modules.account']);
 
-app.controller('sdMainCtrl', require('./sdMainCtrl'));
+modu.controller('sdMainCtrl', require('./sdMainCtrl'));

@@ -3,8 +3,8 @@
  */
 'use strict';
 
-var app = angular.module('app');
+var modu = module.exports = angular.module('modules.pages', []);
 
-app.controller('sdPageDetailCtrl', require('./sdPageDetailCtrl'));
-app.controller('sdPublicPagesListCtrl', require('./sdPublicPagesListCtrl'));
-app.controller('sdUserPagesListCtrl', require('./sdUserPagesListCtrl'));
+modu.controller('sdPageDetailCtrl', require('./sdPageDetailCtrl'));
+modu.controller('sdPublicPagesListCtrl', require('./sdPublicPagesListCtrl'));
+modu.controller('sdUserPagesListCtrl', require('./sdUserPagesListCtrl'));

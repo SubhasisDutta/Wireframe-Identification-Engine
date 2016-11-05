@@ -3,9 +3,9 @@
  */
 'use strict';
 
-var app = angular.module('app');
+var modu = module.exports = angular.module('modules.train', []);
 
-app.controller('sdContributeImageLabelCtrl', require('./sdContributeImageLabelCtrl'));
-app.controller('sdContributeImageUploadCtrl', require('./sdContributeImageUploadCtrl'));
-app.controller('sdModelListCtrl', require('./sdModelListCtrl'));
-app.controller('sdRebuildCtrl', require('./sdRebuildCtrl'));
+modu.controller('sdContributeImageLabelCtrl', require('./sdContributeImageLabelCtrl'));
+modu.controller('sdContributeImageUploadCtrl', require('./sdContributeImageUploadCtrl'));
+modu.controller('sdModelListCtrl', require('./sdModelListCtrl'));
+modu.controller('sdRebuildCtrl', require('./sdRebuildCtrl'));

@@ -4,11 +4,12 @@
 
 'use strict';
 
-var app = angular.module('app');
+var modu = module.exports = angular.module('modules.account', ['ngResource',
+    'modules.common']);
 
-app.factory('sdAuth', require('./sdAuth'));
-app.factory('sdIdentity', require('./sdIdentity'));
-app.controller('sdNavBarLoginCtrl', require('./sdNavBarLoginCtrl'));
-app.controller('sdProfileCtrl', require('./sdProfileCtrl'));
-app.controller('sdSignupCtrl', require('./sdSignupCtrl'));
-app.factory('sdUser', require('./sdUser'));
+modu.factory('sdAuth', require('./sdAuth'));
+modu.factory('sdIdentity', require('./sdIdentity'));
+modu.controller('sdNavBarLoginCtrl', require('./sdNavBarLoginCtrl'));
+modu.controller('sdProfileCtrl', require('./sdProfileCtrl'));
+modu.controller('sdSignupCtrl', require('./sdSignupCtrl'));
+modu.factory('sdUser', require('./sdUser'));

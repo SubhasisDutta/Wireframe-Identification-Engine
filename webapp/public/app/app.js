@@ -10,8 +10,6 @@ require('angular-resource');
 require('angular-route');
 
 
-var app = module.exports = angular.module('app', ['ngResource', 'ngRoute']);
-
 require('./modules/account');
 require('./modules/admin');
 require('./modules/common');
@@ -20,6 +18,9 @@ require('./modules/pages');
 require('./modules/process');
 require('./modules/train');
 
+var app = module.exports = angular.module('app', ['ngRoute',
+        'modules.account', 'modules.admin', 'modules.common', 'modules.main', 'modules.pages',
+        'modules.process', 'modules.train']);
 
 app.config(function ($routeProvider, $locationProvider) {
     var routeRoleChecks = {
