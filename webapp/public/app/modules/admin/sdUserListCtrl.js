@@ -1,3 +1,7 @@
-angular.module('app').controller('sdUserListCtrl', function($scope, sdUser) {
-  $scope.users = sdUser.query();
-});
+'use strict';
+
+module.exports = sdUserListCtrl;
+
+function sdUserListCtrl($scope, sdUser) {
+    $scope.users = sdUser.query();
+}

@@ -1,11 +1,15 @@
-angular.module('app').factory('sdUser', function($resource) {
-  var UserResource = $resource('/api/users/:id', {_id: "@id"}, {
-    update: {method:'PUT',isArray:false}
-  });
+'use strict';
 
-  UserResource.prototype.isAdmin = function() {
-    return this.roles && this.roles.indexOf('admin') > -1;
-  }
+module.exports = sdUser;
 
-  return UserResource;
-});
+function sdUser($resource) {
+    var UserResource = $resource('/api/users/:id', {_id: "@id"}, {
+        update: {method: 'PUT', isArray: false}
+    });
+
+    UserResource.prototype.isAdmin = function () {
+        return this.roles && this.roles.indexOf('admin') > -1;
+    };
+
+    return UserResource;
+}

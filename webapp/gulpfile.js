@@ -19,9 +19,9 @@ var production = (process.env.NODE_ENV === 'production');
 
 var paths = {
   root: '.',
-  client: 'public/app',
+  client: './public/app',
   vendor: 'public/vendor',
-  dist: 'public/dist',
+  dist: './public/dist',
   clientBuild: 'public/build'
 };
 
@@ -61,29 +61,56 @@ gulp.task('js-vendor', function () {
         })
         .pipe(source('vendor.js'));
 
-    stream.pipe(streamify(ngAnnotate()))
-        .pipe(streamify(uglify({mangle: false})))
-        .pipe(gulp.dest('./public/dist'));
+    //stream.pipe(streamify(ngAnnotate()));
+    //stream.pipe(streamify(uglify({mangle: false})));
+    stream.pipe(gulp.dest(paths.dist));
     return stream;
 });
 
 gulp.task('js-bundle', function () {
 
-    gulp.src(['public/app/module.js','public/app/modules/**/*.js','public/app/app.js'])
-        .pipe(sourcemaps.init())
-        .pipe(concat('bundle.js'))
-        .pipe(ngAnnotate())
-        .pipe(uglify())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('public/dist/.'));
+    var b = browserify(paths.client + '/app.js', {
+        // generate source maps in non-production environment
+        debug: !production
+    });
+
+    // mark vendor libraries defined in bower.json as an external library,
+    // so that it does not get bundled with app.js.
+    // instead, we will load vendor libraries from vendor.js bundle
+    getBowerPackageIds().forEach(function (lib) {
+        b.external(lib);
+    });
+
+    // do the similar thing, but for npm-managed modules.
+    // resolve path using 'resolve' module
+    //getNPMPackageIds().forEach(function (id) {
+    //    b.external(id);
+    //});
+
+    var stream = b.bundle().pipe(source('bundle.js'));
+
+    // pipe additional tasks here (for eg: minifying / uglifying, etc)
+    // remember to turn off name-mangling if needed when uglifying
+
+    stream.pipe(gulp.dest(paths.dist));
+
+    return stream;
+
+    // gulp.src(['public/app/module.js','public/app/modules/**/*.js','public/app/app.js'])
+    //     .pipe(sourcemaps.init())
+    //     .pipe(concat('bundle.js'))
+    //     .pipe(ngAnnotate())
+    //     .pipe(uglify())
+    //     .pipe(sourcemaps.write())
+    //     .pipe(gulp.dest('public/dist/.'));
 });
 
-gulp.task('default',['js-vendor']);
+gulp.task('default',['js-bundle']);
 
 gulp.task('build-client',['js-vendor','js-bundle']);
 
-gulp.task('watch', ['build-client'], function () {
-    gulp.watch('public/app/**/*.js', ['build-client']);
+gulp.task('watch', ['js-bundle'], function () {
+    gulp.watch('public/app/**/*.js', ['js-bundle']);
 });
 
 

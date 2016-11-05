@@ -1,4 +1,7 @@
-angular.module('app').controller('sdMainCtrl', function($scope,sdIdentity) {
-  $scope.identity = sdIdentity;
+'use strict';
 
-});
+module.exports = sdMainCtrl;
+
+function sdMainCtrl($scope, sdIdentity) {
+    $scope.identity = sdIdentity;
+}

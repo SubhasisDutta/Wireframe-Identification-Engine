@@ -1,10 +1,11 @@
-angular.module('app').value('sdToastr', toastr);
+'use strict';
 
-angular.module('app').factory('sdNotifier', function(sdToastr) {
-  return {
-    notify: function(msg) {
-      sdToastr.success(msg);
-      //console.log(msg);
-    }
-  }
-})
+module.exports = sdNotifier;
+
+function sdNotifier(sdToastr) {
+    return {
+        notify: function(msg) {
+            sdToastr.success(msg);
+        }
+    };
+}
