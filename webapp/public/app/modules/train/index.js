@@ -3,7 +3,10 @@
  */
 'use strict';
 
-var modu = module.exports = angular.module('modules.train', []);
+require('angular-img-cropper');
+require('ng-file-upload');
+
+var modu = module.exports = angular.module('modules.train', ['angular-img-cropper', 'ngFileUpload']);
 
 modu.controller('sdContributeImageLabelCtrl', require('./sdContributeImageLabelCtrl'));
 modu.controller('sdContributeImageUploadCtrl', require('./sdContributeImageUploadCtrl'));

@@ -105,15 +105,13 @@ gulp.task('js-bundle', function () {
     //     .pipe(gulp.dest('public/dist/.'));
 });
 
-gulp.task('default',['js-bundle']);
-
 gulp.task('build-client',['js-vendor','js-bundle']);
 
 gulp.task('watch', ['js-bundle'], function () {
     gulp.watch('public/app/**/*.js', ['js-bundle']);
 });
 
-
+gulp.task('default',['build-client']);
 
 /**
  * Helper function(s)

@@ -1,3 +1,49 @@
 //
    Created by subhasis on 11/1/16.
-
+.container
+    .row
+        .col-md-10
+            h2 Add images into the knowledge base.
+            p
+                | Few restrictions on the Croped Image:
+                ul
+                    li The Croped image will be converted to a 200 X 200 size Image.
+                    li Provide the Text in the image (if any).
+                    li Provide a Label for the Croped Image. (Required)
+                    li For best results load images within size 1024 X 1024
+        .col-md-2
+            button.btn.btn-primary(ng-href='/contribute/list') Upload List
+    .row
+        .col-md-6
+            div
+                .form-group
+                    label(for='InputFile') Source Image
+                    input#inputFile.btn.btn-primary(type='file', img-cropper-fileread='',
+                    image='cropper.sourceImage')
+                    p.help-block Upload an Image to Annotate.
+                .crop-model-box
+                    div(ng-show='cropper.croppedImage!=null')
+                        img(ng-src='{{cropper.croppedImage}}')
+                div
+                    | Cropped Image (Left: {{bounds.left}} Right: {{bounds.right}}
+                    | Top: {{bounds.top}} Bottom: {{bounds.bottom}})
+                button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage)") Submit
+        .col-md-6
+            .form-group
+                label(for='inputText') Image Text (If Any)
+                input#inputText.form-control(type='text', placeholder='Image Text', ng-model='controlText')
+            label(for='labelSelect') Identify Label For Croped Image *
+            select#labelSelect.form-control(ng-model='controlLabel')
+                option Text
+                option Button
+                option Chart
+                option Image
+                option Icon
+                option Table
+    .row
+        .col-md-12
+            div
+                canvas#canvas(width='1024', height='1024', image-cropper='',
+                image='cropper.sourceImage', cropped-image='cropper.croppedImage',
+                crop-width='200', crop-height='200', min-width='100', min-height='50',
+                keep-aspect='false', crop-area-bounds='bounds')
