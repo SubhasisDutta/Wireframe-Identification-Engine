@@ -11,12 +11,38 @@ As per the steps in Root ReadMe.md file.
 ## Setup
 
 From inside the webapp folder run:
-1. npm install.
-2. bower install
+```
+$ npm install.
+$ bower install
+```
 
 ### During Development
 
+Build vendor.js and bundle.js
 
+```
+$ gulp build-client
+```
+
+Start the watch
+```
+$ gulp watch
+```
+
+Run Server using nodemon
+```
+$ nodemon server.js
+```
 
 ### In Production
+Set NODE_ENV to production
 
+Build vendor.js and bundle.js
+```
+$ gulp build-client
+```
+
+Run Server using node or forever
+```
+$ node server.js
+```
