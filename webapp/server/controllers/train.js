@@ -63,6 +63,23 @@ exports.uploadCropedImage = function(req, res) {
     });
 };
 
-exports.markImageLabel = function(req, res) {
-
+exports.getUserModelList = function(req, res) {
+    var curentUserName = req.user.username;
+    ImageMetadata.find({username: curentUserName, image_type: 'Model_Train'}).exec(function (err, collection) {
+        var result = [];
+        for (var i in collection) {
+            var resultObj = {
+                _id: collection[i]._id,
+                image_type: collection[i].image_type,
+                uploaded_on: collection[i].uploaded_on,
+                status: collection[i].status,
+                actual_label: collection[i].actual_label,
+                actual_text: collection[i].actual_text,
+                prediction_label: collection[i].prediction_label,
+                prediction_text: collection[i].prediction_text
+            };
+            result.push(resultObj);
+        }
+        res.send(result);
+    });
 };

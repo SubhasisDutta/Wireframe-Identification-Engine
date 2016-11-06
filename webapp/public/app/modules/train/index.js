@@ -8,7 +8,7 @@ require('ng-file-upload');
 
 var modu = module.exports = angular.module('modules.train', ['angular-img-cropper', 'ngFileUpload']);
 
-modu.controller('sdContributeImageLabelCtrl', require('./sdContributeImageLabelCtrl'));
+modu.controller('sdContributeImageListCtrl', require('./sdContributeImageListCtrl'));
 modu.controller('sdContributeImageUploadCtrl', require('./sdContributeImageUploadCtrl'));
 modu.controller('sdModelListCtrl', require('./sdModelListCtrl'));
 modu.controller('sdRebuildCtrl', require('./sdRebuildCtrl'));

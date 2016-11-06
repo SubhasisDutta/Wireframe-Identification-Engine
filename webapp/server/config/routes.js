@@ -18,7 +18,7 @@ module.exports = function (app) {
     app.get('/api/page/userPages', pages.getUserPages);
 
     app.post('/api/contribute/upload', auth.requiresApiLogin, train.uploadCropedImage);
-    //app.post('/api/train/imageLabel/:id', auth.requiresApiLogin, train.markImageLabel);
+    app.get('/api/contribute/userImages',auth.requiresApiLogin, train.getUserModelList);
 
     app.get('/api/build/modelList', auth.requiresRole('admin'), buildModel.getModelList);
     app.post('/api/build/rebuildModel', auth.requiresRole('admin'), buildModel.rebuildModel);
