@@ -4,8 +4,7 @@ var auth = require('./auth'),
     page = require('../controllers/page'),
     train = require('../controllers/train'),
     buildModel = require('../controllers/buildModel'),
-    processWI = require('../controllers/processWI'),
-    mongoose = require('mongoose');
+    processWI = require('../controllers/processWI');
 
 module.exports = function (app) {
 
@@ -18,8 +17,8 @@ module.exports = function (app) {
     app.get('/api/page/image/:id', page.getImageById);
     app.get('/api/page/userPages', pages.getUserPages);
 
-    app.post('/api/train/upload', auth.requiresApiLogin, train.uploadCropedImage);
-    app.post('/api/train/imageLabel/:id', auth.requiresApiLogin, train.markImageLabel);
+    app.post('/api/contribute/upload', auth.requiresApiLogin, train.uploadCropedImage);
+    //app.post('/api/train/imageLabel/:id', auth.requiresApiLogin, train.markImageLabel);
 
     app.get('/api/build/modelList', auth.requiresRole('admin'), buildModel.getModelList);
     app.post('/api/build/rebuildModel', auth.requiresRole('admin'), buildModel.rebuildModel);

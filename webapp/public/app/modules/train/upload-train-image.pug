@@ -13,7 +13,7 @@
                     li For best results load images within size 1024 X 1024
         .col-md-2
             button.btn.btn-primary(ng-href='/contribute/list') Upload List
-    .row
+    form.form-horizontal.row(name="modelDataUpload")
         .col-md-6
             div
                 .form-group
@@ -27,7 +27,7 @@
                 div
                     | Cropped Image (Left: {{bounds.left}} Right: {{bounds.right}}
                     | Top: {{bounds.top}} Bottom: {{bounds.bottom}})
-                button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage)") Submit
+                button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage, controlText, controlLabel)") Submit
         .col-md-6
             .form-group
                 label(for='inputText') Image Text (If Any)
@@ -45,5 +45,5 @@
             div
                 canvas#canvas(width='1024', height='1024', image-cropper='',
                 image='cropper.sourceImage', cropped-image='cropper.croppedImage',
-                crop-width='200', crop-height='200', min-width='100', min-height='50',
+                crop-width='200', crop-height='200', min-width='10', min-height='10',
                 keep-aspect='false', crop-area-bounds='bounds')
