@@ -24,7 +24,6 @@ module.exports = function (app) {
     app.post('/api/build/rebuildModel', auth.requiresRole('admin'), buildModel.rebuildModel);
 
     app.post('/api/process/upload', auth.requiresApiLogin, processWI.uploadWireframeImage);
-    app.post('/api/process/crop/:id', auth.requiresApiLogin, processWI.uploadWireframeCropedImage);
     app.post('/api/process/identify/:id', auth.requiresApiLogin, processWI.identifyWireframe);
     app.post('/api/process/annotate/:id', auth.requiresApiLogin, processWI.annotateWireframe);
     app.post('/api/process/startWireframeAnalysis/:id', auth.requiresApiLogin, processWI.startIdentification);

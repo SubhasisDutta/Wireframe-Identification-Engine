@@ -83,15 +83,11 @@ app.config(function ($routeProvider, $locationProvider) {
             templateUrl: '/partials/process/upload-wireframe',
             controller: 'sdProcessUploadCtrl', resolve: routeRoleChecks.user
         })
-        .when('/process/crop', {
-            templateUrl: '/partials/process/crop-wireframe',
-            controller: 'sdProcessCropCtrl', resolve: routeRoleChecks.user
-        })
         .when('/process/identify', {
             templateUrl: '/partials/process/identify-wireframe',
             controller: 'sdProcessIdentifyCtrl', resolve: routeRoleChecks.user
         })
-        .when('/process/annotate', {
+        .when('/process/annotate/:id', {
             templateUrl: '/partials/process/annotate-wireframe',
             controller: 'sdProcessAnnotateCtrl', resolve: routeRoleChecks.user
         });

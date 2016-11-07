@@ -12,6 +12,6 @@ module.exports = {
     rootPath: rootPath,
     db: 'mongodb://localhost/wireframe-tagging', //TODO: find the correct string to connect to staging server
     port: process.env.PORT || 6060,  //TODO: Change the Port Number to 80
-    imageRepo: '/home/subhasis/data/WIEImageRepo' //TODO: Change this Path
+    imageRepo: '/home/subhasis/data/WIEImageRepo' //TODO : Chenge this paths
   }
 }

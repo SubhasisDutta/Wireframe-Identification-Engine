@@ -5,7 +5,7 @@
 
 module.exports = sdProcessUploadCtrl;
 
-function sdProcessUploadCtrl ($scope, Upload, sdNotifier) {
+function sdProcessUploadCtrl ($scope, Upload, sdNotifier, $location) {
     $scope.cropper = {};
     $scope.cropper.sourceImage = null;
     $scope.cropper.croppedImage = null;
@@ -19,10 +19,6 @@ function sdProcessUploadCtrl ($scope, Upload, sdNotifier) {
         var c = Math.abs(a - b);
         return c < 200 ? 200: c;
     };
-
-    $scope.cropper.cropedWireframeWidth = $scope.findSize($scope.bounds.left, $scope.bounds.right);
-    $scope.cropper.cropedWireframeHeight = $scope.findSize($scope.bounds.top, $scope.bounds.bottom);
-
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
             bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
@@ -32,15 +28,16 @@ function sdProcessUploadCtrl ($scope, Upload, sdNotifier) {
         return new File([u8arr], filename, {type:mime});
     }
 
-    $scope.uploadCropedImage = function (cropedImage, controlText, controlLabel) {
-        controlText = controlText ? controlText : '';
-        controlLabel = controlLabel ? controlLabel : 'Text';
+    $scope.uploadCropedImage = function (cropedImage, width, height) {
         var imageFile = dataURLtoFile(cropedImage, 'a.png');
         Upload.upload({
-            url: '/api/contribute/upload',
-            data: {controlText: controlText, controlLabel: controlLabel, file: imageFile}
+            url: '/api/process/upload',
+            data: {width: width, height: height, file: imageFile}
         }).then(function (response) {
             sdNotifier.notify(response.data.message);
+            if (response.data.code === 200) {
+                $location.path('/api/process/annotate/' + response.data.id);
+            }
         });
     }
 }
