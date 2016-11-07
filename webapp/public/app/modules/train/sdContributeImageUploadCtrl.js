@@ -6,6 +6,8 @@
 module.exports = sdContributeImageUploadCtrl;
 
 function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
+    $scope.controlLabel = 'Text';
+
     $scope.cropper = {};
     $scope.cropper.sourceImage = null;
     $scope.cropper.croppedImage = null;
@@ -14,6 +16,11 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
     $scope.bounds.right = 0;
     $scope.bounds.top = 0;
     $scope.bounds.bottom = 0;
+
+    $scope.findSize = function (a, b) {
+        var c = Math.abs(a - b);
+        return c < 10 ? 10: c;
+    };
 
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -24,13 +31,13 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
         return new File([u8arr], filename, {type:mime});
     }
 
-    $scope.uploadCropedImage = function (cropedImage, controlText, controlLabel) {
+    $scope.uploadCropedImage = function (cropedImage, controlText, controlLabel, width, height) {
         controlText = controlText ? controlText : '';
         controlLabel = controlLabel ? controlLabel : 'Text';
         var imageFile = dataURLtoFile(cropedImage, 'a.png');
         Upload.upload({
             url: '/api/contribute/upload',
-            data: {controlText: controlText, controlLabel: controlLabel, file: imageFile}
+            data: {width: width, height: height, controlText: controlText, controlLabel: controlLabel, file: imageFile}
         }).then(function (response) {
             sdNotifier.notify(response.data.message);
         });

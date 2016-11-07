@@ -5,6 +5,8 @@ var multer = require('multer');
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var config = require('../config/config')[env];
 var ImageMetadata = require('../models/ImageMetadata');
+var wireframeMetadata = require('../models/WireframeMetadata');
+
 
 exports.uploadWireframeImage = function(req, res) {
     var currentUser = req.user;
@@ -57,7 +59,22 @@ exports.uploadWireframeImage = function(req, res) {
             res.json({code:510,message:err});
             return;
         }
-        res.json({code:200,message:"File Uploaded Successfully.",id:req.body.recordId});
+        wireframeMetadata.create(
+            {uploaded_on: new Date(),
+                username: req.user.username,
+                wireframeImageId: req.body.recordId,
+                wireframe_width: req.body.width,
+                wireframe_height: req.body.height,
+                acessType: req.body.acessType,
+            },function(err,record){
+                if(err){
+                    res.json({code:510,message:err});
+                }else{
+                    res.json({code:200,message:"Wireframe Uploaded Successfully.",id:record._id});
+                }
+            });
+
+
     });
 };
 

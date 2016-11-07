@@ -15,6 +15,8 @@ function sdProcessUploadCtrl ($scope, Upload, sdNotifier, $location) {
     $scope.bounds.top = 0;
     $scope.bounds.bottom = 0;
 
+    $scope.acessType = 'Public';
+
     $scope.findSize = function (a, b) {
         var c = Math.abs(a - b);
         return c < 200 ? 200: c;
@@ -28,11 +30,11 @@ function sdProcessUploadCtrl ($scope, Upload, sdNotifier, $location) {
         return new File([u8arr], filename, {type:mime});
     }
 
-    $scope.uploadCropedImage = function (cropedImage, width, height) {
+    $scope.uploadCropedImage = function (cropedImage, width, height, acessType) {
         var imageFile = dataURLtoFile(cropedImage, 'a.png');
         Upload.upload({
             url: '/api/process/upload',
-            data: {width: width, height: height, file: imageFile}
+            data: {acessType: acessType, width: width, height: height, file: imageFile}
         }).then(function (response) {
             sdNotifier.notify(response.data.message);
             if (response.data.code === 200) {
