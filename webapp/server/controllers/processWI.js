@@ -82,7 +82,24 @@ exports.uploadWireframeImage = function (req, res) {
 };
 
 exports.identifyWireframe = function (req, res) {
-
+    wireframeMetadata.findOne({_id: req.params.id}).exec(function (err, appData) {
+        if (err) {
+            res.status(404);
+            return res.send({reason: err.toString()});
+        }
+        var responceObj = {
+            _id: appData._id,
+            title: appData.title,
+            wireframeImageId: appData.wireframeImageId,
+            uploaded_on: appData.uploaded_on,
+            username: appData.username,
+            wireframe_width: appData.wireframe_width,
+            wireframe_height: appData.wireframe_height,
+            acessType: appData.acessType,
+            controls: appData.controls
+        };
+        res.send(responceObj);
+    });
 };
 
 exports.annotateWireframe = function (req, res) {

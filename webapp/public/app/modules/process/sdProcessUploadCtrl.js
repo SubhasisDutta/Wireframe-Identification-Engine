@@ -45,7 +45,7 @@ function sdProcessUploadCtrl($scope, Upload, sdNotifier, $location, sdIdentity) 
         }).then(function (response) {
             sdNotifier.notify(response.data.message);
             if (response.data.code === 200) {
-                $location.path('/api/process/annotate/' + response.data.id);
+                $location.path('/process/annotate/' + response.data.id);
             }
         });
     }

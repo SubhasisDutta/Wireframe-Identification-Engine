@@ -3,22 +3,17 @@
 .container
     .row
         .col-md-10
-            h2 Mark the Controls in Wireframe - {{sourceId}}
+            h2 Wireframe - {{wireframeMetadata.title}}
             h3 Step 2 - Mark all the Controls to be identified in the Wireframe.
-    form.form-horizontal.row(name="modelDataUpload")
-        .col-md-6
-            div
-                .form-group
-                    label(for='InputFile') Source Image
-                    img#inputFile.btn.btn-primary(type='file', img-cropper-fileread='',
-                    image='cropper.sourceImage', src='/api/page/image/{{sourceId}}')
+    .row
+        form.form-horizontal.row(name="modelDataUpload")
+            .col-md-6
                 div
                     h5 Cropped Image Dimention
                     | Width : {{findSize(bounds.left, bounds.right)}} px &nbsp;
                     | Height : {{findSize(bounds.top, bounds.bottom)}} px
                 button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage," +
                 " findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom))") Upload
-
     .row
         .col-md-12
             div
@@ -27,4 +22,7 @@
                 crop-width='200', crop-height='200',
                 min-width='10', min-height='10',
                 keep-aspect='false')
+
+
+
 

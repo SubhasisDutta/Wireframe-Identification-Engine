@@ -83,7 +83,7 @@ app.config(function ($routeProvider, $locationProvider) {
             templateUrl: '/partials/process/upload-wireframe',
             controller: 'sdProcessUploadCtrl', resolve: routeRoleChecks.user
         })
-        .when('/process/identify', {
+        .when('/process/identify/:id', {
             templateUrl: '/partials/process/identify-wireframe',
             controller: 'sdProcessIdentifyCtrl', resolve: routeRoleChecks.user
         })
