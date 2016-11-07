@@ -8,10 +8,10 @@ var ImageMetadata = require('../models/ImageMetadata');
 var wireframeMetadata = require('../models/WireframeMetadata');
 
 
-exports.uploadWireframeImage = function(req, res) {
+exports.uploadWireframeImage = function (req, res) {
     var currentUser = req.user;
-    if(currentUser === undefined){
-        res.json({code:500,message:"Please Login. The Current User is not Authorized."});
+    if (currentUser === undefined) {
+        res.json({code: 500, message: "Please Login. The Current User is not Authorized."});
         return;
     }
 
@@ -29,16 +29,17 @@ exports.uploadWireframeImage = function(req, res) {
                 bottom_right_y: req.body.height
             };
             ImageMetadata.create(
-                {uploaded_on: new Date(),
+                {
+                    uploaded_on: new Date(),
                     username: req.user.username,
                     image_type: 'Wireframe',
                     status: 'Wireframe',
                     image_dimention: image_dimention
-                },function(err,record){
-                    if(err){
+                }, function (err, record) {
+                    if (err) {
                         cb(new Error('There was an error in Uploading.'));
-                        cb(null,false);
-                    }else{
+                        cb(null, false);
+                    } else {
                         var newFileName = record._id + '.png';
                         req.body.recordId = record._id + '';
                         file.newName = newFileName;
@@ -52,25 +53,27 @@ exports.uploadWireframeImage = function(req, res) {
         storage: storage
     }).single('file');
 
-    upload(req,res,function(err){
-        if(err){
+    upload(req, res, function (err) {
+        if (err) {
             console.log(err);
             console.log("Error Getting Executed");
-            res.json({code:510,message:err});
+            res.json({code: 510, message: err});
             return;
         }
         wireframeMetadata.create(
-            {uploaded_on: new Date(),
+            {
+                title: req.body.title,
+                uploaded_on: new Date(),
                 username: req.user.username,
                 wireframeImageId: req.body.recordId,
                 wireframe_width: req.body.width,
                 wireframe_height: req.body.height,
                 acessType: req.body.acessType,
-            },function(err,record){
-                if(err){
-                    res.json({code:510,message:err});
-                }else{
-                    res.json({code:200,message:"Wireframe Uploaded Successfully.",id:record._id});
+            }, function (err, record) {
+                if (err) {
+                    res.json({code: 510, message: err});
+                } else {
+                    res.json({code: 200, message: "Wireframe Uploaded Successfully.", id: record._id});
                 }
             });
 
@@ -78,14 +81,14 @@ exports.uploadWireframeImage = function(req, res) {
     });
 };
 
-exports.identifyWireframe = function(req, res) {
+exports.identifyWireframe = function (req, res) {
 
 };
 
-exports.annotateWireframe = function(req, res) {
+exports.annotateWireframe = function (req, res) {
 
 };
 
-exports.startIdentification = function(req, res) {
+exports.startIdentification = function (req, res) {
 
 };

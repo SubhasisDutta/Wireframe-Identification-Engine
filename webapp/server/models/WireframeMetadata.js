@@ -4,18 +4,19 @@
 var mongoose = require('mongoose');
 
 var control = mongoose.Schema({
-    controlImageId: {type: String, required:'{PATH} is required!'},
-    uploaded_on: {type:Date, required:'{PATH} is required!'},
-    username: {type: String,required: '{PATH} is required!'}
+    controlImageId: {type: String, required: '{PATH} is required!'},
+    uploaded_on: {type: Date, required: '{PATH} is required!'},
+    username: {type: String, required: '{PATH} is required!'}
 });
 
 var wireframeMetadata = mongoose.Schema({
-    wireframeImageId : {type: String, required:'{PATH} is required!'},
-    uploaded_on: {type:Date, required:'{PATH} is required!'},
-    username: {type: String,required: '{PATH} is required!'},
+    title: {type: String, required: '{PATH} is required!'},
+    wireframeImageId: {type: String, required: '{PATH} is required!'},
+    uploaded_on: {type: Date, required: '{PATH} is required!'},
+    username: {type: String, required: '{PATH} is required!'},
     wireframe_width: {type: Number},
     wireframe_height: {type: Number},
-    acessType: {type: String,required: '{PATH} is required!'},
+    acessType: {type: String, required: '{PATH} is required!'},
     //Public, Private
     controls: [control]
 });

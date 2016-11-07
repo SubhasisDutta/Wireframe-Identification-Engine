@@ -13,17 +13,21 @@
                     input#inputFile.btn.btn-primary(type='file', img-cropper-fileread='',
                     image='cropper.sourceImage')
                     p.help-block Upload a Wireframe.
-                    label(for='labelSelect') Identify Acess Type *
-                        select#labelSelect.form-control(ng-model='acessType')
-                            option Public
-                            option Private
+
                 div
                     h5 Cropped Image Dimention
                     | Width : {{findSize(bounds.left, bounds.right)}} px &nbsp;
                     | Height : {{findSize(bounds.top, bounds.bottom)}} px
                 button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage," +
-                " findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom), acessType)") Upload
-
+                " findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom), acessType, wireframeTitle)") Upload
+        .col-md-6
+            .form-group
+                label(for='inputText') Wireframe Title *
+                input#inputText.form-control(type='text', placeholder='Wireframe Title', ng-model='wireframeTitle')
+            label(for='labelSelect') Identify Acess Type *
+                select#labelSelect.form-control(ng-model='acessType')
+                    option Public
+                    option Private
     .row
         .col-md-12
             div
