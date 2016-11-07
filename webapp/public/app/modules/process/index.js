@@ -3,7 +3,10 @@
  */
 'use strict';
 
-var modu = module.exports = angular.module('modules.process', []);
+require('angular-img-cropper');
+require('ng-file-upload');
+
+var modu = module.exports = angular.module('modules.process', ['angular-img-cropper', 'ngFileUpload']);
 
 modu.controller('sdProcessAnnotateCtrl', require('./sdProcessAnnotateCtrl'));
 modu.controller('sdProcessCropCtrl', require('./sdProcessCropCtrl'));

@@ -1,3 +1,29 @@
 //
    Created by subhasis on 11/1/16.
+.container
+    .row
+        .col-md-10
+            h2 Upload an Wireframe to identify Controls
+            h3 Step 1 - Upload an Image and Crop the area to be considered as Wireframe.
+    form.form-horizontal.row(name="modelDataUpload")
+        .col-md-6
+            div
+                .form-group
+                    label(for='InputFile') Source Image
+                    input#inputFile.btn.btn-primary(type='file', img-cropper-fileread='',
+                    image='cropper.sourceImage')
+                    p.help-block Upload a Wireframe.
+                div
+                    h5 Cropped Image Dimention
+                    | Width : {{findSize(bounds.left, bounds.right)}} px &nbsp;
+                    | Height : {{findSize(bounds.top, bounds.bottom)}} px
+                button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage, controlText, controlLabel)") Next
 
+    .row
+        .col-md-12
+            div
+                canvas#canvas(width='1024', height='1024', image-cropper='',
+                image='cropper.sourceImage', cropped-image='cropper.croppedImage',
+                crop-width='findSize(bounds.left, bounds.right)', crop-height='findSize(bounds.top, bounds.bottom)',
+                min-width='200', min-height='200',
+                keep-aspect='false', crop-area-bounds='bounds')
