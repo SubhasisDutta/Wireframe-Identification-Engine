@@ -62,15 +62,16 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
     };
 
     $scope.saveEdit = function () {
-        var postingsResource = $resource('/api/process/updatewireframe/:_id',
+        var postingsResource = new $resource('/api/process/updatewireframe/:_id',
             {_id: $routeParams.id},
             {'update': {method: 'PUT'}});
         var saveObj = {
             title: $scope.wireframeMetadata.title,
             acessType: $scope.wireframeMetadata.acessType
         };
-        var response = postingsResource.update(saveObj);
-        sdNotifier.notify('Updated');
+        postingsResource.update(saveObj).$promise.then(function(response) {
+            sdNotifier.notify(response.message);
+        });
     };
 
     $scope.findSize = function (a, b) {
@@ -93,4 +94,21 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
             }
         });
     };
+
+    $scope.deleteControl = function (imageId) {
+        var removeResource = new $resource('/api/process/removeControl/:_id',
+            {_id: $routeParams.id},
+            {'update': {method: 'PUT'}});
+        var reqObj = {
+            controlImageId: imageId
+        };
+        removeResource.update(reqObj).$promise.then(function(response) {
+            sdNotifier.notify(response.message);
+            if(response.code === 200) {
+                wmRes.get({_id: $routeParams.id}, function (response) {
+                    $scope.wireframeMetadata = response;
+                });
+            }
+        });
+    }
 }
