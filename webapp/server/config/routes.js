@@ -19,6 +19,7 @@ module.exports = function (app) {
 
     app.post('/api/contribute/upload', auth.requiresApiLogin, train.uploadCropedImage);
     app.get('/api/contribute/userImages',auth.requiresApiLogin, train.getUserModelList);
+    app.put('/api/contribute/removeControl/:id', auth.requiresApiLogin, train.deleteControl);
 
     app.get('/api/build/modelList', auth.requiresRole('admin'), buildModel.getModelList);
     app.post('/api/build/rebuildModel', auth.requiresRole('admin'), buildModel.rebuildModel);
@@ -27,7 +28,7 @@ module.exports = function (app) {
     app.get('/api/process/identify/:id', auth.requiresApiLogin, processWI.identifyWireframe);
     app.put('/api/process/updatewireframe/:id', auth.requiresApiLogin, processWI.updatewireframeMetadata);
     app.post('/api/process/uploadcontrol/:id', auth.requiresApiLogin, processWI.uploadcontrol);
-    app.put('/api/process/removeControl/:id', auth.requiresApiLogin, processWI.deleteControl)
+    app.put('/api/process/removeControl/:id', auth.requiresApiLogin, processWI.deleteControl);
 
     app.get('/partials/*', function (req, res) {
         res.render('../../public/app/modules/' + req.params[0]);

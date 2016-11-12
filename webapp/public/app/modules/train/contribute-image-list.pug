@@ -25,7 +25,7 @@
         tbody
             tr(ng-repeat="data in userContributeData | filter:searchText | orderBy:sortOrder")
                 td
-                    img.model-image-box(src='/api/page/image/{{data._id}}')
+                    img.model-image-box(ng-src='/api/page/image/{{data._id}}')
                 td {{data.uploaded_on | date}}
                 td {{data.image_type}}
                 td {{data.status}}
@@ -39,3 +39,5 @@
                 |   &nbsp;
                 //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_text")
                 //|   {{item.provider}} -- {{item.result}}
+                td
+                    button.btn.btn-primary(ng-click="deleteControl(data._id)") X
