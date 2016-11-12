@@ -86,6 +86,11 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
             data: {bounds: bounds, file: imageFile}
         }).then(function (response) {
             sdNotifier.notify(response.data.message);
+            if(response.data.code === 200) {
+                wmRes.get({_id: $routeParams.id}, function (response) {
+                    $scope.wireframeMetadata = response;
+                });
+            }
         });
     };
 }

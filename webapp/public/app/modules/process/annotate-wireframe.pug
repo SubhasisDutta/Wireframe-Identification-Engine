@@ -30,6 +30,14 @@
                 button.btn.btn-primary.home-button(ng-click="cropSelectedImage(cropper.croppedImage, bounds)") Crop Image as Control
     .row
         .col-md-12
+            div#canvas-annotate-box
+                canvas#canvas-annotate(width='1024', height='1024', image-cropper='',
+                image='cropper.sourceImage', cropped-image='cropper.croppedImage',
+                crop-width='200', crop-height='200',
+                min-width='10', min-height='10',
+                keep-aspect='false', crop-area-bounds='bounds')
+    .row
+        .col-md-12
             table.table.table-hover.table-striped.table-condensed
                 thead
                     tr
@@ -45,10 +53,10 @@
                 tbody
                     tr(ng-repeat="data in wireframeMetadata.controls | orderBy:-uploaded_on")
                         td
-                        | &nbsp;  <!--img.model-image-box(src='/api/page/image/' + data._id)-->
+                            img.model-image-box(ng-src='/api/page/image/{{data._id}}')
                         td {{data.uploaded_on | date}}
-                        td Width: {{data.image_width}} , Height: {{data.image_height}}
-                        td Top-Left-X: {{data.top_left_x}} , Top-Left-Y: {{data.top_left_y}}, Bottom-Right-X: {{data.bottom_right_x}} , Bottom-Right-Y: {{data.bottom_right_y}}
+                        td Width: {{data.object_width}} , Height: {{data.object_height}}
+                        td Top-Left-X: {{data.image_dimention.top_left_x}} , Top-Left-Y: {{data.image_dimention.top_left_y}}, Bottom-Right-X: {{data.image_dimention.bottom_right_x}} , Bottom-Right-Y: {{data.image_dimention.bottom_right_y}}
                         td {{data.status}}
                         td {{data.actual_label}}
                         td {{data.actual_text}}
@@ -60,15 +68,6 @@
                         |   &nbsp;
                         //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_text")
                         //|   {{item.provider}} -- {{item.result}}
-    .row
-        .col-md-12
-            div#canvas-annotate-box
-                canvas#canvas-annotate(width='1024', height='1024', image-cropper='',
-                image='cropper.sourceImage', cropped-image='cropper.croppedImage',
-                crop-width='200', crop-height='200',
-                min-width='10', min-height='10',
-                keep-aspect='false', crop-area-bounds='bounds')
-
 
 
 

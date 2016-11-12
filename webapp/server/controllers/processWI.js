@@ -85,18 +85,28 @@ exports.identifyWireframe = function (req, res) {
             res.status(404);
             return res.send({reason: err.toString()});
         }
-        var responceObj = {
-            _id: appData._id,
-            title: appData.title,
-            wireframeImageId: appData.wireframeImageId,
-            uploaded_on: appData.uploaded_on,
-            username: appData.username,
-            wireframe_width: appData.wireframe_width,
-            wireframe_height: appData.wireframe_height,
-            acessType: appData.acessType,
-            controls: appData.controls
-        };
-        res.send(responceObj);
+        var imageIDs = [];
+        for(var i in appData.controls) {
+            imageIDs.push(appData.controls[i].controlImageId);
+        }
+        ImageMetadata.find()
+            .where('_id')
+            .in(imageIDs)
+            .exec(function (err, records) {
+                var responceObj = {
+                    _id: appData._id,
+                    title: appData.title,
+                    wireframeImageId: appData.wireframeImageId,
+                    uploaded_on: appData.uploaded_on,
+                    username: appData.username,
+                    wireframe_width: appData.wireframe_width,
+                    wireframe_height: appData.wireframe_height,
+                    acessType: appData.acessType,
+                    controls: records
+                };
+                res.send(responceObj);
+            });
+
     });
 };
 
