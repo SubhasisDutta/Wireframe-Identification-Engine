@@ -102,8 +102,11 @@ exports.identifyWireframe = function (req, res) {
     });
 };
 
-exports.annotateWireframe = function (req, res) {
-
+exports.updatewireframeMetadata = function (req, res) {
+    wireframeMetadata.update({_id: req.params.id}, {$set: {title: req.body.title, acessType: req.body.acessType}}, function (err, data) {
+        if (err) return res.json({code: 510, message: "Errot in updating Tile and Acess Type"});
+        res.json({code: 200, message: "Tile and Acess Type Updated"});
+    });
 };
 
 exports.startIdentification = function (req, res) {

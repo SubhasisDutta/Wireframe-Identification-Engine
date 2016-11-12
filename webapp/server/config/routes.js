@@ -25,7 +25,8 @@ module.exports = function (app) {
 
     app.post('/api/process/upload', auth.requiresApiLogin, processWI.uploadWireframeImage);
     app.get('/api/process/identify/:id', auth.requiresApiLogin, processWI.identifyWireframe);
-    app.post('/api/process/annotate/:id', auth.requiresApiLogin, processWI.annotateWireframe);
+    app.put('/api/process/updatewireframe/:id', auth.requiresApiLogin, processWI.updatewireframeMetadata);
+
     app.post('/api/process/startWireframeAnalysis/:id', auth.requiresApiLogin, processWI.startIdentification);
 
     app.get('/partials/*', function (req, res) {

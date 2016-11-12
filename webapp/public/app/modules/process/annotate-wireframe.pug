@@ -8,20 +8,69 @@
     .row
         form.form-horizontal.row(name="modelDataUpload")
             .col-md-6
+                .form-group
+                    label(for='inputText') Wireframe Title *
+                    input#inputText.form-control(type='text', placeholder='Wireframe Title', ng-model='wireframeMetadata.title')
+                .col-md-6
+                    label(for='labelSelect') Identify Acess Type *
+                        select#labelSelect.form-control(ng-model='wireframeMetadata.acessType')
+                            option Public
+                            option Private
+                    button.btn.btn-primary.home-button(ng-click="saveEdit()") Save Changes
+            .col-md-6
+                .crop-model-box
+                    div(ng-show='cropper.croppedImage!=null')
+                        img(ng-src='{{cropper.croppedImage}}')
                 div
                     h5 Cropped Image Dimention
+                    | Position: Top - Left: ({{bounds.left}}, {{1024 - bounds.top}}) Bottom - Right: ({{bounds.right}},{{ 1024 - bounds.bottom}})
+                    br
                     | Width : {{findSize(bounds.left, bounds.right)}} px &nbsp;
                     | Height : {{findSize(bounds.top, bounds.bottom)}} px
-                button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage," +
-                " findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom))") Upload
+                button.btn.btn-primary.home-button(ng-click="cropSelectedImage(cropper.croppedImage, bounds)") Crop Image as Control
     .row
         .col-md-12
-            div
-                canvas#canvas(width='1024', height='1024', image-cropper='',
+            table.table.table-hover.table-striped.table-condensed
+                thead
+                    tr
+                        th Image
+                        th Upload Date
+                        th Image Dimention
+                        th Image Position
+                        th Status
+                        th Actual Lavel
+                        th Actual Text
+                        th Predicted Lable
+                        th Predicted Text
+                tbody
+                    tr(ng-repeat="data in wireframeMetadata.controls | orderBy:-uploaded_on")
+                        td
+                            img.model-image-box(src='/api/page/image/{{data._id}}')
+                        td {{data.uploaded_on | date}}
+                        td Width: {{data.image_width}} , Height: {{data.image_height}}
+                        td Top-Left-X: {{data.top_left_x}} , Top-Left-Y: {{data.top_left_y}}, Bottom-Right-X: {{data.bottom_right_x}} , Bottom-Right-Y: {{data.bottom_right_y}}
+                        td {{data.status}}
+                        td {{data.actual_label}}
+                        td {{data.actual_text}}
+                        td(ng-if='data.prediction_label.length === 0')
+                        |   &nbsp;
+                        //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_label")
+                        //|   {{item.provider}} -- {{item.result}}
+                        td(ng-if='data.prediction_text.length === 0')
+                        |   &nbsp;
+                        //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_text")
+                        //|   {{item.provider}} -- {{item.result}}
+    .row
+        .col-md-12
+            div#canvas-annotate-box
+                canvas#canvas-annotate(width='1024', height='1024', image-cropper='',
                 image='cropper.sourceImage', cropped-image='cropper.croppedImage',
                 crop-width='200', crop-height='200',
                 min-width='10', min-height='10',
-                keep-aspect='false')
+                keep-aspect='false', crop-area-bounds='bounds')
+
+
+
 
 
 
