@@ -5,7 +5,7 @@
 
 module.exports = sdProcessAnnotateCtrl;
 
-function sdProcessAnnotateCtrl ($scope, Upload, sdNotifier, $routeParams, $resource) {
+function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resource) {
     $scope.cropper = {};
     $scope.cropper.sourceImage = null;
     $scope.cropper.croppedImage = null;
@@ -15,10 +15,10 @@ function sdProcessAnnotateCtrl ($scope, Upload, sdNotifier, $routeParams, $resou
     $scope.bounds.top = 0;
     $scope.bounds.bottom = 0;
     var wmRes = $resource("/api/process/identify/:_id");
-    wmRes.get({_id: $routeParams.id}, function(response) {
+    wmRes.get({_id: $routeParams.id}, function (response) {
         $scope.wireframeMetadata = response;
         var url = '/api/page/image/' + $scope.wireframeMetadata.wireframeImageId;
-        convertFileToDataURLviaFileReader(url, function(base64Img) {
+        convertFileToDataURLviaFileReader(url, function (base64Img) {
             $scope.cropper.sourceImage = base64Img;
             //TODO: fix the problem when canvas does not load the image until page refresh
             // this is because the template gets loaded without the source image
@@ -31,9 +31,9 @@ function sdProcessAnnotateCtrl ($scope, Upload, sdNotifier, $routeParams, $resou
     function convertFileToDataURLviaFileReader(url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'blob';
-        xhr.onload = function() {
+        xhr.onload = function () {
             var reader = new FileReader();
-            reader.onloadend = function() {
+            reader.onloadend = function () {
                 callback(reader.result);
             };
             reader.readAsDataURL(xhr.response);
@@ -45,10 +45,10 @@ function sdProcessAnnotateCtrl ($scope, Upload, sdNotifier, $routeParams, $resou
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
             bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-        while(n--){
+        while (n--) {
             u8arr[n] = bstr.charCodeAt(n);
         }
-        return new File([u8arr], filename, {type:mime});
+        return new File([u8arr], filename, {type: mime});
     }
 
     $scope.uploadCropedImage = function (cropedImage) {
@@ -61,10 +61,10 @@ function sdProcessAnnotateCtrl ($scope, Upload, sdNotifier, $routeParams, $resou
         });
     };
 
-    $scope.saveEdit = function() {
+    $scope.saveEdit = function () {
         var postingsResource = $resource('/api/process/updatewireframe/:_id',
-            { _id: $routeParams.id},
-            { 'update': { method:'PUT' }});
+            {_id: $routeParams.id},
+            {'update': {method: 'PUT'}});
         var saveObj = {
             title: $scope.wireframeMetadata.title,
             acessType: $scope.wireframeMetadata.acessType
@@ -76,5 +76,16 @@ function sdProcessAnnotateCtrl ($scope, Upload, sdNotifier, $routeParams, $resou
     $scope.findSize = function (a, b) {
         var c = Math.abs(a - b);
         return c < 10 ? 10 : c;
+    };
+
+    $scope.cropSelectedImage = function (cropedImage, bounds) {
+        var imageFile = dataURLtoFile(cropedImage, 'a.png');
+        var wireframeId = $routeParams.id;
+        Upload.upload({
+            url: '/api/process/uploadcontrol/' + wireframeId,
+            data: {bounds: bounds, file: imageFile}
+        }).then(function (response) {
+            sdNotifier.notify(response.data.message);
+        });
     };
 }

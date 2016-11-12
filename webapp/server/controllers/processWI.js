@@ -76,8 +76,6 @@ exports.uploadWireframeImage = function (req, res) {
                     res.json({code: 200, message: "Wireframe Uploaded Successfully.", id: record._id});
                 }
             });
-
-
     });
 };
 
@@ -109,6 +107,76 @@ exports.updatewireframeMetadata = function (req, res) {
     });
 };
 
-exports.startIdentification = function (req, res) {
+exports.uploadcontrol = function (req, res) {
+    var currentUser = req.user;
+    if (currentUser === undefined) {
+        res.json({code: 500, message: "Please Login. The Current User is not Authorized."});
+        return;
+    }
 
+    //multers disk storage settings
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, config.imageRepo);
+        },
+        filename: function (req, file, cb) {
+            //Store ImageMetadata in db
+            var image_dimention = {
+                top_left_x: req.body.bounds.left,
+                top_left_y: 1024 - req.body.bounds.top,
+                bottom_right_x: req.body.bounds.right,
+                bottom_right_y: 1024 - req.body.bounds.bottom
+            };
+            ImageMetadata.create(
+                {
+                    uploaded_on: new Date(),
+                    username: req.user.username,
+                    image_type: 'Wireframe_Control',
+                    status: 'Control_Not_Processed',
+                    image_dimention: image_dimention,
+                    object_width: Math.abs(req.body.bounds.left - req.body.bounds.right),
+                    object_height: Math.abs(req.body.bounds.top - req.body.bounds.bottom),
+                }, function (err, record) {
+                    if (err) {
+                        cb(new Error('There was an error in Uploading.'));
+                        cb(null, false);
+                    } else {
+                        var newFileName = record._id + '.png';
+                        req.body.recordId = record._id + '';
+                        file.newName = newFileName;
+                        cb(null, newFileName);
+                    }
+                });
+        }
+    });
+
+    var upload = multer({
+        storage: storage
+    }).single('file');
+
+    upload(req, res, function (err) {
+        if (err) {
+            console.log(err);
+            console.log("Error Getting Executed");
+            res.json({code: 510, message: err});
+            return;
+        }
+        var control = {
+            controlImageId: req.body.recordId,
+            uploaded_on: new Date(),
+            username: req.user.username
+        };
+        wireframeMetadata.findByIdAndUpdate(
+            req.params.id,
+            {$push: {"controls": control}},
+            {safe: true, new : true},
+            function(err, model) {
+                if (err) {
+                    res.json({code: 510, message: "Error in Uploding Control."});
+                } else {
+                    res.json({code: 200, message: "Control Uploaded Successfully."});
+                }
+            }
+        );
+    });
 };
