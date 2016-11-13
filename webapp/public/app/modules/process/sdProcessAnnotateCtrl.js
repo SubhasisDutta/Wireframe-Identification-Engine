@@ -79,12 +79,12 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
         return c < 10 ? 10 : c;
     };
 
-    $scope.cropSelectedImage = function (cropedImage, bounds) {
+    $scope.cropSelectedImage = function (cropedImage, bounds, wireframe_height) {
         var imageFile = dataURLtoFile(cropedImage, 'a.png');
         var wireframeId = $routeParams.id;
         Upload.upload({
             url: '/api/process/uploadcontrol/' + wireframeId,
-            data: {bounds: bounds, file: imageFile}
+            data: {wireframe_height: wireframe_height, bounds: bounds, file: imageFile}
         }).then(function (response) {
             sdNotifier.notify(response.data.message);
             if(response.data.code === 200) {

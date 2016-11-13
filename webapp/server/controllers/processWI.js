@@ -102,9 +102,9 @@ exports.uploadcontrol = function (req, res) {
             //Store ImageMetadata in db
             var image_dimention = {
                 top_left_x: req.body.bounds.left,
-                top_left_y: 1024 - req.body.bounds.top,
+                top_left_y: req.body.wireframe_height - req.body.bounds.top,
                 bottom_right_x: req.body.bounds.right,
-                bottom_right_y: 1024 - req.body.bounds.bottom
+                bottom_right_y: req.body.wireframe_height - req.body.bounds.bottom
             };
             ImageMetadata.create(
                 {
