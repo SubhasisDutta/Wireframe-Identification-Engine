@@ -12,7 +12,7 @@ module.exports = function (app) {
     app.post('/api/users', users.createUser);
     app.put('/api/users', users.updateUser);
 
-    app.get('/api/public-pages', pages.getAllPublicPages);
+    app.get('/api/publicpages', pages.getAllPublicPages);
     app.get('/api/page/detail/:id', page.getPageById);
     app.get('/api/page/image/:id', page.getImageById);
     app.get('/api/page/userPages', auth.requiresApiLogin, pages.getUserPages);

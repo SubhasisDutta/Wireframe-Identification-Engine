@@ -68,3 +68,6 @@ footer p {
 .no-padding-box {
   padding: 0px;
 }
+.public-extra-margin {
+  margin-top: 100px;
+}

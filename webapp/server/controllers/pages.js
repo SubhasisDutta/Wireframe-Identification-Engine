@@ -5,7 +5,23 @@
 var wireframeMetadata = require('../models/WireframeMetadata');
 
 exports.getAllPublicPages = function(req, res) {
-
+    wireframeMetadata.find({acessType: 'Public'}).exec(function (err, collection) {
+        var result = [];
+        for (var i in collection) {
+            var resultObj = {
+                _id: collection[i]._id,
+                title: collection[i].title,
+                uploaded_on: collection[i].uploaded_on,
+                username: collection[i].username,
+                wireframeImageId: collection[i].wireframeImageId,
+                wireframe_width: collection[i].wireframe_width,
+                wireframe_height: collection[i].wireframe_height,
+                no_of_controls: collection[i].controls.length
+            };
+            result.push(resultObj);
+        }
+        res.send(result);
+    });
 };
 
 exports.getUserPages = function(req, res) {
