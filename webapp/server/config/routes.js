@@ -15,7 +15,8 @@ module.exports = function (app) {
     app.get('/api/public-pages', pages.getAllPublicPages);
     app.get('/api/page/detail/:id', page.getPageById);
     app.get('/api/page/image/:id', page.getImageById);
-    app.get('/api/page/userPages', pages.getUserPages);
+    app.get('/api/page/userPages', auth.requiresApiLogin, pages.getUserPages);
+    app.put('/api/page/removeWireframe/:id', auth.requiresApiLogin, page.removeWireframe);
 
     app.post('/api/contribute/upload', auth.requiresApiLogin, train.uploadCropedImage);
     app.get('/api/contribute/userImages',auth.requiresApiLogin, train.getUserModelList);
@@ -25,7 +26,6 @@ module.exports = function (app) {
     app.post('/api/build/rebuildModel', auth.requiresRole('admin'), buildModel.rebuildModel);
 
     app.post('/api/process/upload', auth.requiresApiLogin, processWI.uploadWireframeImage);
-    app.get('/api/process/identify/:id', auth.requiresApiLogin, processWI.identifyWireframe);
     app.put('/api/process/updatewireframe/:id', auth.requiresApiLogin, processWI.updatewireframeMetadata);
     app.post('/api/process/uploadcontrol/:id', auth.requiresApiLogin, processWI.uploadcontrol);
     app.put('/api/process/removeControl/:id', auth.requiresApiLogin, processWI.deleteControl);

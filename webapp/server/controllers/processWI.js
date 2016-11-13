@@ -79,37 +79,6 @@ exports.uploadWireframeImage = function (req, res) {
     });
 };
 
-exports.identifyWireframe = function (req, res) {
-    wireframeMetadata.findOne({_id: req.params.id}).exec(function (err, appData) {
-        if (err) {
-            res.status(404);
-            return res.send({reason: err.toString()});
-        }
-        var imageIDs = [];
-        for(var i in appData.controls) {
-            imageIDs.push(appData.controls[i].controlImageId);
-        }
-        ImageMetadata.find()
-            .where('_id')
-            .in(imageIDs)
-            .exec(function (err, records) {
-                var responceObj = {
-                    _id: appData._id,
-                    title: appData.title,
-                    wireframeImageId: appData.wireframeImageId,
-                    uploaded_on: appData.uploaded_on,
-                    username: appData.username,
-                    wireframe_width: appData.wireframe_width,
-                    wireframe_height: appData.wireframe_height,
-                    acessType: appData.acessType,
-                    controls: records
-                };
-                res.send(responceObj);
-            });
-
-    });
-};
-
 exports.updatewireframeMetadata = function (req, res) {
     wireframeMetadata.update({_id: req.params.id}, {$set: {title: req.body.title, acessType: req.body.acessType}}, function (err, data) {
         if (err) return res.json({code: 510, message: "Errot in updating Tile and Acess Type"});

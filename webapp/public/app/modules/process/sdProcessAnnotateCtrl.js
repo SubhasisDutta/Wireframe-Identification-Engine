@@ -14,7 +14,7 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
     $scope.bounds.right = 0;
     $scope.bounds.top = 0;
     $scope.bounds.bottom = 0;
-    var wmRes = $resource("/api/process/identify/:_id");
+    var wmRes = $resource("/api/page/detail/:_id");
     wmRes.get({_id: $routeParams.id}, function (response) {
         $scope.wireframeMetadata = response;
         var url = '/api/page/image/' + $scope.wireframeMetadata.wireframeImageId;
