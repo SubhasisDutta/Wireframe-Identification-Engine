@@ -75,7 +75,7 @@ WantedBy=multi-user.target
 ```	
 d. Start Service
 ```
-$ start the newly created service with systemctl
+$ sudo systemctl start mongodb
 ```
 e. Check Service Status
 ```    
