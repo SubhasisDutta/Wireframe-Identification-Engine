@@ -2,6 +2,7 @@
  * Created by subhasis on 11/5/16.
  */
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 
 var prediction = mongoose.Schema({
     provider: {type:String, required:'{PATH} is required!'},
@@ -32,6 +33,7 @@ var imageMetadata = mongoose.Schema({
     username: {type: String,required: '{PATH} is required!'},
     tags: [String]
 });
+imageMetadata.plugin(mongoosePaginate);
 
 var ImageMetadata = mongoose.model('ImageMetadata', imageMetadata);
 

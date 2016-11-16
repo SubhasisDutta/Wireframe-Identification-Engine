@@ -6,12 +6,22 @@
 module.exports = sdUserPagesListCtrl;
 
 function sdUserPagesListCtrl ($scope, sdIdentity, $resource, sdNotifier, $location) {
-    $scope.userApps = [];
-    var userPages = $resource("/api/page/userPages");
-    if (sdIdentity.currentUser !== undefined) {
-        $scope.identity = sdIdentity;
-        $scope.userWireframes = userPages.query();
+    $scope.perPage = 20;
+    $scope.maxSize = 5;
+
+    function getResult() {
+        var pageNo = 1;
+        if($scope.userWireframes && $scope.userWireframes.page){
+            pageNo = $scope.userWireframes.page;
+        }
+        var userPages = $resource("/api/page/userPages/" + pageNo + "/" + $scope.perPage);
+        $scope.userWireframes = userPages.get();
     }
+    getResult();
+
+    $scope.pageChanged = function() {
+        getResult();
+    };
 
     $scope.sortOptions = [{value: "-uploaded_on", text: "Sort by Upload Date"},
         {value: "title", text: "Sort by Title"},
@@ -25,7 +35,7 @@ function sdUserPagesListCtrl ($scope, sdIdentity, $resource, sdNotifier, $locati
         removeResource.update().$promise.then(function(response) {
             sdNotifier.notify(response.message);
             if(response.code === 200) {
-                $scope.userWireframes = userPages.query();
+                getResult();
             }
         });
     };

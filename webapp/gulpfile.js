@@ -61,8 +61,8 @@ gulp.task('js-vendor', function () {
         })
         .pipe(source('vendor.js'));
 
-    //stream.pipe(streamify(ngAnnotate()));
-    //stream.pipe(streamify(uglify({mangle: false})));
+    stream.pipe(streamify(ngAnnotate()));
+    stream.pipe(streamify(uglify({mangle: false})));
     stream.pipe(gulp.dest(paths.dist));
     return stream;
 });

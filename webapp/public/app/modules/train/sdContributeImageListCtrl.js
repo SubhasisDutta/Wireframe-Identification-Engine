@@ -5,13 +5,24 @@
 
 module.exports = sdContributeImageLabelCtrl;
 
-function sdContributeImageLabelCtrl($scope, sdIdentity, $resource, sdNotifier) {
-    $scope.userApps = [];
-    var userContributeData = $resource("/api/contribute/userImages");
-    if (sdIdentity.currentUser !== undefined) {
-        $scope.identity = sdIdentity;
-        $scope.userContributeData = userContributeData.query();
+function sdContributeImageLabelCtrl($scope, $resource, sdNotifier) {
+    $scope.perPage = 25;
+    $scope.maxSize = 5;
+
+
+    function getResult() {
+        var pageNo = 1;
+        if($scope.userContributeData && $scope.userContributeData.page){
+            pageNo = $scope.userContributeData.page;
+        }
+        var userContributeData = $resource("/api/contribute/userImages/" + pageNo + "/" + $scope.perPage);
+        $scope.userContributeData = userContributeData.get();
     }
+    getResult();
+
+    $scope.pageChanged = function() {
+        getResult();
+    };
 
     $scope.sortOptions = [{value: "-uploaded_on", text: "Sort by Upload Date"},
         {value: "actual_label", text: "Sort by Label"}];
@@ -24,7 +35,7 @@ function sdContributeImageLabelCtrl($scope, sdIdentity, $resource, sdNotifier) {
         removeResource.update().$promise.then(function(response) {
             sdNotifier.notify(response.message);
             if(response.code === 200) {
-                $scope.userContributeData = userContributeData.query();
+                getResult();
             }
         });
     }

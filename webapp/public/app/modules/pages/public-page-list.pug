@@ -5,6 +5,9 @@
                 input.form-control(ng-model="searchText", placeholder="Filter")
             .form-group.margin-left-med
                 select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+        ul.pagination-sm(uib-pagination, total-items='publicWireframes.total',
+        max-size='maxSize', ng-model='publicWireframes.page', num-pages='numPages', items-per-page='perPage'
+        boundary-link-numbers='true', force-ellipses='true', rotate='false', ng-change='pageChanged()')
     table.table.table-hover.table-striped.table-condensed
         thead
             tr
@@ -16,7 +19,7 @@
                 th No of Controls
                 th User Email
         tbody
-            tr(ng-repeat="data in publicWireframes | filter:searchText | orderBy:sortOrder")
+            tr(ng-repeat="data in publicWireframes.docs | filter:searchText | orderBy:sortOrder")
                 td
                     img.model-image-box(ng-src='/api/page/image/{{data.wireframeImageId}}')
                 td
@@ -24,5 +27,6 @@
                 td {{data.uploaded_on | date}}
                 td {{data.wireframe_width}} px
                 td {{data.wireframe_height}} px
-                td {{data.no_of_controls}}
+                td {{data.controls.length}}
                 td {{data.username}}
+    pre Page : {{publicWireframes.page}} / {{numPages}}

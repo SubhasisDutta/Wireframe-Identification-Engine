@@ -5,42 +5,32 @@
 var wireframeMetadata = require('../models/WireframeMetadata');
 
 exports.getAllPublicPages = function(req, res) {
-    wireframeMetadata.find({acessType: 'Public'}).exec(function (err, collection) {
-        var result = [];
-        for (var i in collection) {
-            var resultObj = {
-                _id: collection[i]._id,
-                title: collection[i].title,
-                uploaded_on: collection[i].uploaded_on,
-                username: collection[i].username,
-                wireframeImageId: collection[i].wireframeImageId,
-                wireframe_width: collection[i].wireframe_width,
-                wireframe_height: collection[i].wireframe_height,
-                no_of_controls: collection[i].controls.length
-            };
-            result.push(resultObj);
-        }
-        res.send(result);
-    });
+    var currentPage = Number(req.params.pageno) || 1;
+    var perPageLimit = Number(req.params.limit) || 20;
+    wireframeMetadata.paginate({acessType: 'Public'},
+        {
+            page: currentPage,
+            limit: perPageLimit,
+            select: '_id title uploaded_on username wireframeImageId wireframe_width wireframe_height controls.count()',
+            sort: '-uploaded_on',
+            lean: 'true'
+        }).then(function (result) {
+            res.send(result);
+        });
 };
 
 exports.getUserPages = function(req, res) {
     var curentUserName = req.user.username;
-    wireframeMetadata.find({username: curentUserName}).exec(function (err, collection) {
-        var result = [];
-        for (var i in collection) {
-            var resultObj = {
-                _id: collection[i]._id,
-                title: collection[i].title,
-                uploaded_on: collection[i].uploaded_on,
-                wireframeImageId: collection[i].wireframeImageId,
-                wireframe_width: collection[i].wireframe_width,
-                wireframe_height: collection[i].wireframe_height,
-                no_of_controls: collection[i].controls.length,
-                acessType: collection[i].acessType
-            };
-            result.push(resultObj);
-        }
-        res.send(result);
-    });
+    var currentPage = Number(req.params.pageno) || 1;
+    var perPageLimit = Number(req.params.limit) || 20;
+    wireframeMetadata.paginate({username: curentUserName},
+        {
+            page: currentPage,
+            limit: perPageLimit,
+            select: '_id title uploaded_on wireframeImageId wireframe_width wireframe_height acessType controls.length',
+            sort: '-uploaded_on',
+            lean: 'true'
+        }).then(function (result) {
+            res.send(result);
+        });
 };

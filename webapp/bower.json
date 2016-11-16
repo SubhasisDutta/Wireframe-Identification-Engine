@@ -19,6 +19,7 @@
     "angular-material": "^1.1.1",
     "angular-material-icons": "^0.7.1",
     "angular-img-cropper": "^1.1.0",
-    "ng-file-upload": "^12.2.13"
+    "ng-file-upload": "^12.2.13",
+    "angular-bootstrap": "^2.2.0"
   }
 }

@@ -2,6 +2,7 @@
  * Created by subhasis on 11/6/16.
  */
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 
 var control = mongoose.Schema({
     controlImageId: {type: String, required: '{PATH} is required!'},
@@ -20,6 +21,8 @@ var wireframeMetadata = mongoose.Schema({
     //Public, Private
     controls: [control]
 });
+
+wireframeMetadata.plugin(mongoosePaginate);
 
 var WireframeMetadata = mongoose.model('WireframeMetadata', wireframeMetadata);
 

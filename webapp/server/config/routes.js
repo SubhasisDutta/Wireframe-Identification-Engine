@@ -12,14 +12,14 @@ module.exports = function (app) {
     app.post('/api/users', users.createUser);
     app.put('/api/users', users.updateUser);
 
-    app.get('/api/publicpages', pages.getAllPublicPages);
+    app.get('/api/publicpages/:pageno/:limit', pages.getAllPublicPages);
     app.get('/api/page/detail/:id', page.getPageById);
     app.get('/api/page/image/:id', page.getImageById);
-    app.get('/api/page/userPages', auth.requiresApiLogin, pages.getUserPages);
+    app.get('/api/page/userPages/:pageno/:limit', auth.requiresApiLogin, pages.getUserPages);
     app.put('/api/page/removeWireframe/:id', auth.requiresApiLogin, page.removeWireframe);
 
     app.post('/api/contribute/upload', auth.requiresApiLogin, train.uploadCropedImage);
-    app.get('/api/contribute/userImages',auth.requiresApiLogin, train.getUserModelList);
+    app.get('/api/contribute/userImages/:pageno/:limit',auth.requiresApiLogin, train.getUserModelList);
     app.put('/api/contribute/removeControl/:id', auth.requiresApiLogin, train.deleteControl);
 
     app.get('/api/build/modelList', auth.requiresRole('admin'), buildModel.getModelList);
