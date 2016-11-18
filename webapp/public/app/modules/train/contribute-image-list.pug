@@ -16,8 +16,6 @@
                 th Control
                 th Upload Date
                 th User
-                th Image Type
-                th Status
                 th Actual Lavel
                 th Actual Text
                 th Predicted Lable
@@ -28,8 +26,6 @@
                     img.model-image-box(ng-src='/api/page/image/{{data._id}}')
                 td {{data.uploaded_on | date}}
                 td {{data.username}}
-                td {{data.image_type}}
-                td {{data.status}}
                 td {{data.actual_label}}
                 td {{data.actual_text}}
                 td(ng-if='data.prediction_label.length === 0')
