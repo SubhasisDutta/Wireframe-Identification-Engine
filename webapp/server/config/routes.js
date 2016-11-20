@@ -9,7 +9,6 @@ var auth = require('./auth'),
 module.exports = function (app) {
 
     app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
-    app.post('/api/createModelDropPacket', auth.requiresRole('admin'), train.createAllTrainDownloadPacket);
     app.post('/api/users', users.createUser);
     app.put('/api/users', users.updateUser);
 
@@ -23,6 +22,8 @@ module.exports = function (app) {
     app.post('/api/contribute/upload', auth.requiresApiLogin, train.uploadCropedImage);
     app.get('/api/contribute/userImages/:pageno/:limit',auth.requiresApiLogin, train.getUserModelList);
     app.put('/api/contribute/removeControl/:id', auth.requiresApiLogin, train.deleteControl);
+    app.get('/api/modeldownloadlist/:pageno/:limit',auth.requiresApiLogin, train.getModelDownloadList);
+    app.put('/api/train/createdownloadzip',auth.requiresApiLogin, train.createZip);
 
     app.get('/api/build/modelList', auth.requiresRole('admin'), buildModel.getModelList);
     app.post('/api/build/rebuildModel', auth.requiresRole('admin'), buildModel.rebuildModel);

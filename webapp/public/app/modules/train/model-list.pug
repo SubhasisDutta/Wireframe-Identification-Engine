@@ -1,3 +1,55 @@
-//
-   Created by subhasis on 11/1/16.
+.container.top-padding-med
+    .row
+        .col-md-4
+            a(href='/contribute/list') Back To Upload List
+            button.btn.btn-primary.home-button(ng-click="triggerZipCreation(selectedUsers, selectedControls)") Create a Data ZIP
+        .col-md-4
+            label(for='usersSelect') Select Users to Include in Data Packet
+            select#usersSelect.form-control(multiple='', ng-model='selectedUsers')
+                option(selected ='') All
+                option(ng-repeat='user in users') {{user.username}}
+            h5 {{selectedUsers}}
+        .col-md-4
+            label(for='controlSelect') Select Controls To Include in Data Packet
+            select#controlSelect.form-control(multiple='', ng-model='selectedControls')
+                option(selected = '') All
+                option Text
+                option Button
+                option Chart
+                option Image
+                option Icon
+                option Table
+            h5 {{selectedControls}}
+    .row.top-padding-med
+        .col-md-12
 
+            .pull-right
+                form.form-inline
+                    .form-group
+                        input.form-control(ng-model="searchText", placeholder="Filter")
+                    .form-group.margin-left-med
+                        select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+                ul.pagination-sm(uib-pagination, total-items='modelList.total',
+                max-size='maxSize', ng-model='modelList.page', num-pages='numPages', items-per-page='perPage'
+                boundary-link-numbers='true', force-ellipses='true', rotate='false', ng-change='pageChanged()')
+            table.table.table-hover.table-striped.table-condensed
+                thead
+                    tr
+                        th Download Link
+                        th Created One
+                        th Created By
+                        th User Data Included
+                        th Controls Included
+                tbody
+                    tr(ng-repeat="data in modelList.docs | filter:searchText | orderBy:sortOrder")
+                        td
+                            a(ng-if='data.download_link', href='{{data.download_link}}') Download from S3
+                        td {{data.uploaded_on | date}}
+                        td {{data.username}}
+                        td
+                            ul.list-unstyled
+                                li(ng-repeat = 'item in data.include_users') {{item}}
+                        td
+                            ul.list-unstyled
+                                li(ng-repeat = 'item in data.include_controls') {{item}}
+            pre Page : {{modelList.page}} / {{numPages}}

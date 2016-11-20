@@ -118,6 +118,6 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
             {'update': {method: 'PUT'}});
         createZipResource.update().$promise.then(function(response) {
             sdNotifier.notify(response.message);
-        })
+        });
     };
 }
