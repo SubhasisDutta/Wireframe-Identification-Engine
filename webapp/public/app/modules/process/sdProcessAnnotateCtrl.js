@@ -110,5 +110,14 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
                 });
             }
         });
-    }
+    };
+
+    $scope.createZip = function () {
+        var createZipResource = new $resource('/api/process/createdownloadzip/:_id',
+            {_id: $routeParams.id},
+            {'update': {method: 'PUT'}});
+        createZipResource.update().$promise.then(function(response) {
+            sdNotifier.notify(response.message);
+        })
+    };
 }

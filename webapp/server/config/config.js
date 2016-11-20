@@ -6,12 +6,18 @@ module.exports = {
     db: 'mongodb://localhost/wireframe-tagging',
     rootPath: rootPath,
     port: process.env.PORT || 6060,
-    imageRepo: '/home/subhasis/data/WIEImageRepo'
+    imageRepo: '/home/subhasis/data/WIEImageRepo',
+    tempDirectory: '/home/subhasis/data/WIETemp',
+    awsAcessKey: 'AKIAIOBOZYVGY3SZGZPA',
+    awssec: 'sgFJdO4n7zfsLjdvtxxiHMUoEnNQscpE0BkTaLFV',
+    awsBucket: 'wie-zip',
+    s3Url: 'https://s3-us-west-2.amazonaws.com'
   },
   production: {
     rootPath: rootPath,
     db: 'mongodb://localhost/wireframe-tagging', //TODO: find the correct string to connect to staging server
     port: process.env.PORT || 6060,  //TODO: Change the Port Number to 80
-    imageRepo: '/home/subhasis/data/WIEImageRepo' //TODO : Chenge this paths
+    imageRepo: '/home/subhasis/data/WIEImageRepo', //TODO : Chenge this paths
+    tempDirectory: '/home/subhasis/data/WIETemp'
   }
 }

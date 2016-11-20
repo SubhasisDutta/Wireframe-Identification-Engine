@@ -2,6 +2,7 @@
 webapp/node_modules
 webapp/public/vendor
 webapp/.idea
+scripts/.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

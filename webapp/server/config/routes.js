@@ -9,6 +9,7 @@ var auth = require('./auth'),
 module.exports = function (app) {
 
     app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
+    app.post('/api/createModelDropPacket', auth.requiresRole('admin'), train.createAllTrainDownloadPacket);
     app.post('/api/users', users.createUser);
     app.put('/api/users', users.updateUser);
 
@@ -17,6 +18,7 @@ module.exports = function (app) {
     app.get('/api/page/image/:id', page.getImageById);
     app.get('/api/page/userPages/:pageno/:limit', auth.requiresApiLogin, pages.getUserPages);
     app.put('/api/page/removeWireframe/:id', auth.requiresApiLogin, page.removeWireframe);
+    app.put('/api/process/createdownloadzip/:id',auth.requiresApiLogin, page.createZip);
 
     app.post('/api/contribute/upload', auth.requiresApiLogin, train.uploadCropedImage);
     app.get('/api/contribute/userImages/:pageno/:limit',auth.requiresApiLogin, train.getUserModelList);
@@ -29,6 +31,8 @@ module.exports = function (app) {
     app.put('/api/process/updatewireframe/:id', auth.requiresApiLogin, processWI.updatewireframeMetadata);
     app.post('/api/process/uploadcontrol/:id', auth.requiresApiLogin, processWI.uploadcontrol);
     app.put('/api/process/removeControl/:id', auth.requiresApiLogin, processWI.deleteControl);
+
+
 
     app.get('/partials/*', function (req, res) {
         res.render('../../public/app/modules/' + req.params[0]);

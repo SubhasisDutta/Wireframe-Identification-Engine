@@ -19,6 +19,8 @@ var wireframeMetadata = mongoose.Schema({
     wireframe_height: {type: Number},
     acessType: {type: String, required: '{PATH} is required!'},
     //Public, Private
+    dropPacketUrl : {type: String},
+    dropPacked_created_on : {type: Date},
     controls: [control]
 });
 
