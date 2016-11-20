@@ -73,7 +73,7 @@ app.config(function ($routeProvider, $locationProvider) {
         })
         .when('/modellist', {
             templateUrl: '/partials/train/model-list',
-            controller: 'sdModelListCtrl', resolve: routeRoleChecks.admin
+            controller: 'sdModelListCtrl', resolve: routeRoleChecks.user
         })
         .when('/rebuild', {
             templateUrl: '/partials/train/rebuild-model',
