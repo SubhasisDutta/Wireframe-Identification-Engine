@@ -2,10 +2,13 @@
    Created by subhasis on 11/1/16.
 .container
     .row
-        .col-md-10
+        .col-md-9
             h2 Wireframe - {{wireframeMetadata.title}}
             h3 Created By: {{wireframeMetadata.username}}
-            h5 Created On: {{wireframeMetadata.uploaded_on}}
+            h5 Created On: {{wireframeMetadata.uploaded_on | date}}
+            h4
+                a(ng-if='wireframeMetadata.dropPacketUrl' href='{{wireframeMetadata.dropPacketUrl}}') Download Page Control
+            h5(ng-if='wireframeMetadata.dropPacked_created_on') Packet Created On : {{wireframeMetadata.dropPacked_created_on | date}}
     .row
         .col-md-12.no-padding-box
             img(ng-src='/api/page/image/{{wireframeMetadata.wireframeImageId}}')

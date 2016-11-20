@@ -8,8 +8,8 @@ module.exports = {
     port: process.env.PORT || 6060,
     imageRepo: '/home/subhasis/data/WIEImageRepo',
     tempDirectory: '/home/subhasis/data/WIETemp',
-    awsAcessKey: 'AKIAIOBOZYVGY3SZGZPA',
-    awssec: 'sgFJdO4n7zfsLjdvtxxiHMUoEnNQscpE0BkTaLFV',
+    awsAcessKey: 'xxx',
+    awssec: 'xxx',
     awsBucket: 'wie-zip',
     s3Url: 'https://s3-us-west-2.amazonaws.com'
   },
