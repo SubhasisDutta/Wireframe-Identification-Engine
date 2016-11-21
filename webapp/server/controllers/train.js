@@ -182,6 +182,8 @@ function triggerZipCreation(selectedUsers, selectedControls, username) {
         });
 }
 
+var awsUtil = require('../utilities/awsUtil');
+
 function copyAllImagesAndProcess(copyFolderPath, imageCopyArray) {
     var copyStatus = [];
     for(var i in imageCopyArray) {
@@ -205,45 +207,13 @@ function copyAllImagesAndProcess(copyFolderPath, imageCopyArray) {
             } else {
                 console.log('Zip Creation Done.');
                 //upload the zip to s3
-                uploadFileToS3(targetZip, keyId);
+                awsUtil.uploadFileToS3(targetZip, keyId, updateDownloadLogURLRecord);
             }
         });
     },10000);
 }
 
-var AWS = require('aws-sdk');
-
-// For dev purposes only
-AWS.config.update({ accessKeyId: config.awsAcessKey, secretAccessKey: config.awssec });
-var s3 = new AWS.S3();
-
-function uploadFileToS3(targetZip, keyId) {
-    fs.readFile(targetZip, function (err, data) {
-        if (err) { throw err; }
-        var params = {Bucket: config.awsBucket, Key: keyId + '.zip', Body: data};
-        s3.putObject(params, function(err, data) {
-            if (err)
-                console.log(err);
-            else {
-                console.log("Successfully uploaded data to wie-zip/" + keyId);
-                //delete folder and zip
-                fsex.remove(targetZip, function (err) {
-                    if (err) return console.error(err);
-                    console.log('Zip Deleated.');
-                });
-                var folderName = targetZip.substring(0, targetZip.length - 4);
-                fsex.remove(folderName, function (err) {
-                    if (err) return console.error(err);
-                    console.log('Folder Deleated.');
-                });
-                var url = config.s3Url + '/' + config.awsBucket + '/' +keyId + '.zip';
-                updateWireframeURLRecord(keyId,url);
-            }
-        });
-    });
-}
-
-function updateWireframeURLRecord(keyId,url) {
+function updateDownloadLogURLRecord(keyId,url) {
     TestDataDownloadLog.findByIdAndUpdate(
         keyId,
         {$set: {"download_link": url,"uploaded_on": new Date()}},
