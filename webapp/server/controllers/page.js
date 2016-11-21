@@ -9,6 +9,7 @@ const fs = require('fs');
 var fsex = require('fs-extra');
 var json2csv = require('json2csv');
 var zipFolder = require('zip-folder');
+var thumbnailUtil = require('../utilities/thumbnail');
 
 exports.getPageById = function(req, res) {
     wireframeMetadata.findOne({_id: req.params.id}).exec(function (err, appData) {
@@ -59,6 +60,7 @@ exports.getImageById = function(req, res) {
         if(err) {
             console.log('File Does not Exist. Trying Original');
             fileName = getFileName(null,req.params.id);
+            thumbnailUtil.createSquareThumbnail(config.imageRepo, config.imageRepo, fileName, 50);
             res.sendfile(fileName, options, function (err) {
                 if (err) {
                     console.log(err);
