@@ -11,9 +11,9 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
     $scope.cropper.croppedImage = null;
     $scope.bounds = {};
     $scope.bounds.left = 0;
-    $scope.bounds.right = 0;
+    $scope.bounds.right = 200;
     $scope.bounds.top = 0;
-    $scope.bounds.bottom = 0;
+    $scope.bounds.bottom = 200;
     var wmRes = $resource("/api/page/detail/:_id");
     wmRes.get({_id: $routeParams.id}, function (response) {
         $scope.wireframeMetadata = response;
