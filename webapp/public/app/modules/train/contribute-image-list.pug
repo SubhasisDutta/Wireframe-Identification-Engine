@@ -25,7 +25,7 @@
         tbody
             tr(ng-repeat="data in userContributeData.docs | filter:searchText | orderBy:sortOrder")
                 td
-                    img.model-image-box(ng-src='/api/page/image/{{data._id}}')
+                    img.model-image-box(ng-src='/api/page/image/{{data._id}}?ts=50')
                 td {{data.uploaded_on | date}}
                 td {{data.username}}
                 td {{data.actual_label}}

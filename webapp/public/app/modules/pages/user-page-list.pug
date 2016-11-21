@@ -23,7 +23,7 @@
         tbody
             tr(ng-repeat="data in userWireframes.docs | filter:searchText | orderBy:sortOrder")
                 td
-                    img.model-image-box(ng-src='/api/page/image/{{data.wireframeImageId}}')
+                    img.model-image-box(ng-src='/api/page/image/{{data.wireframeImageId}}?ts=50')
                 td
                     a(href='/pagedetail/{{data._id}}') {{data.title}}
                 td {{data.uploaded_on | date}}

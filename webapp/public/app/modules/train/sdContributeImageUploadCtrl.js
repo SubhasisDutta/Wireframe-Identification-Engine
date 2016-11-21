@@ -13,9 +13,9 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
     $scope.cropper.croppedImage = null;
     $scope.bounds = {};
     $scope.bounds.left = 0;
-    $scope.bounds.right = 0;
+    $scope.bounds.right = 200;
     $scope.bounds.top = 0;
-    $scope.bounds.bottom = 0;
+    $scope.bounds.bottom = 200;
 
     $scope.findSize = function (a, b) {
         var c = Math.abs(a - b);

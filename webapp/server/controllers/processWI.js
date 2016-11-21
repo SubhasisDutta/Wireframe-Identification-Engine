@@ -7,6 +7,7 @@ var config = require('../config/config')[env];
 var ImageMetadata = require('../models/ImageMetadata');
 var wireframeMetadata = require('../models/WireframeMetadata');
 const fs = require('fs');
+var thumbnailUtil = require('../utilities/thumbnail');
 
 exports.uploadWireframeImage = function (req, res) {
     var currentUser = req.user;
@@ -15,6 +16,7 @@ exports.uploadWireframeImage = function (req, res) {
         return;
     }
 
+    var originalFileName = null;
     //multers disk storage settings
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -43,6 +45,7 @@ exports.uploadWireframeImage = function (req, res) {
                         var newFileName = record._id + '.png';
                         req.body.recordId = record._id + '';
                         file.newName = newFileName;
+                        originalFileName = newFileName;
                         cb(null, newFileName);
                     }
                 });
@@ -73,6 +76,8 @@ exports.uploadWireframeImage = function (req, res) {
                 if (err) {
                     res.json({code: 510, message: err});
                 } else {
+                    thumbnailUtil.createSquareThumbnail(config.imageRepo, config.imageRepo, originalFileName, 50);
+                    //thumbnailUtil.createSquareThumbnail(config.imageRepo, config.imageRepo, originalFileName, 200);
                     res.json({code: 200, message: "Wireframe Uploaded Successfully.", id: record._id});
                 }
             });
@@ -93,6 +98,7 @@ exports.uploadcontrol = function (req, res) {
         return;
     }
 
+    var originalFileName = null;
     //multers disk storage settings
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -123,6 +129,7 @@ exports.uploadcontrol = function (req, res) {
                         var newFileName = record._id + '.png';
                         req.body.recordId = record._id + '';
                         file.newName = newFileName;
+                        originalFileName = newFileName;
                         cb(null, newFileName);
                     }
                 });
@@ -153,6 +160,8 @@ exports.uploadcontrol = function (req, res) {
                 if (err) {
                     res.json({code: 510, message: "Error in Uploding Control."});
                 } else {
+                    thumbnailUtil.createSquareThumbnail(config.imageRepo, config.imageRepo, originalFileName, 50);
+                    //thumbnailUtil.createSquareThumbnail(config.imageRepo, config.imageRepo, originalFileName, 200);
                     res.json({code: 200, message: "Control Uploaded Successfully."});
                 }
             }

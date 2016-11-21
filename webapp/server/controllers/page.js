@@ -43,16 +43,35 @@ exports.getPageById = function(req, res) {
     });
 };
 
+function getFileName(thumbnailSize, id) {
+    if(thumbnailSize) {
+        return thumbnailSize + '_' + id + '.png';
+    }
+    return id + '.png';
+}
+
 exports.getImageById = function(req, res) {
-    var fileName = req.params.id + '.png';
+    var fileName = getFileName(req.query.ts, req.params.id);
     var options = {
         root: config.imageRepo
     };
-    res.sendfile(fileName, options, function (err) {
-        if (err) {
-            console.log(err);
-            res.status(err.status).end();
+    fs.open(config.imageRepo +'/' +fileName, 'r', function(err) {
+        if(err) {
+            console.log('File Does not Exist. Trying Original');
+            fileName = getFileName(null,req.params.id);
+            res.sendfile(fileName, options, function (err) {
+                if (err) {
+                    console.log(err);
+                    res.status(err.status).end();
+                }
+            });
         }
+        res.sendfile(fileName, options, function (err) {
+            if (err) {
+                console.log(err);
+                res.status(err.status).end();
+            }
+        });
     });
 };
 
@@ -105,6 +124,7 @@ function triggerZipCreation(wireframeId) {
         for(var i in appData.controls) {
             if(appData.controls[i].controlImageId) {
                 imageCopyArray.push(appData.controls[i].controlImageId);
+                imageCopyArray.push('50_' + appData.controls[i].controlImageId);
             }
         }
         var copyFolderPath = config.tempDirectory + '/' +wireframeId;
@@ -171,8 +191,7 @@ function uploadFileToS3(targetZip, wireframeID) {
         if (err) { throw err; }
         var params = {Bucket: config.awsBucket, Key: wireframeID + '.zip', Body: data};
         s3.putObject(params, function(err, data) {
-            if (err)
-                console.log(err);
+            if (err)console.log(err);
             else {
                 console.log("Successfully uploaded data to wie-zip/" + wireframeID);
                 //delete folder and zip

@@ -57,7 +57,7 @@
                 tbody
                     tr(ng-repeat="data in wireframeMetadata.controls | orderBy:-uploaded_on")
                         td
-                            img.model-image-box(ng-src='/api/page/image/{{data._id}}')
+                            img.model-image-box(ng-src='/api/page/image/{{data._id}}?ts=50')
                         td {{data.uploaded_on | date}}
                         td Width: {{data.object_width}} , Height: {{data.object_height}}
                         td Top-Left-X: {{data.image_dimention.top_left_x}} , Top-Left-Y: {{data.image_dimention.top_left_y}}, Bottom-Right-X: {{data.image_dimention.bottom_right_x}} , Bottom-Right-Y: {{data.image_dimention.bottom_right_y}}

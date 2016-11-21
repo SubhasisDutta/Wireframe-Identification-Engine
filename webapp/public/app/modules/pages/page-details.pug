@@ -32,7 +32,7 @@
                     tr(ng-repeat="data in wireframeMetadata.controls | orderBy:-uploaded_on")
                         td {{$index + 1}}
                         td
-                            img.model-image-box-100(ng-src='/api/page/image/{{data._id}}')
+                            img.model-image-box-100(ng-src='/api/page/image/{{data._id}}?ts=50')
                         td {{data.uploaded_on | date}}
                         td Width: {{data.object_width}}
                            br

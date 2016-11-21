@@ -7,7 +7,7 @@ var config = require('../config/config')[env];
 var ImageMetadata = require('../models/ImageMetadata');
 var TestDataDownloadLog = require('../models/TestDataDownloadLog');
 const fs = require('fs');
-
+var thumbnailUtil = require('../utilities/thumbnail');
 
 exports.uploadCropedImage = function (req, res) {
     var currentUser = req.user;
@@ -15,7 +15,7 @@ exports.uploadCropedImage = function (req, res) {
         res.json({code: 500, message: "Please Login. The Current User is not Authorized."});
         return;
     }
-
+    var originalFileName = null;
     //multers disk storage settings
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -47,6 +47,7 @@ exports.uploadCropedImage = function (req, res) {
                     } else {
                         var newFileName = record._id + '.png';
                         file.newName = newFileName;
+                        originalFileName = newFileName;
                         cb(null, newFileName);
                     }
                 });
@@ -65,6 +66,8 @@ exports.uploadCropedImage = function (req, res) {
             res.json({code: 510, message: err});
             return;
         }
+        thumbnailUtil.createSquareThumbnail(config.imageRepo, config.imageRepo, originalFileName, 50);
+        //thumbnailUtil.createSquareThumbnail(config.imageRepo, config.imageRepo, originalFileName, 200);
         res.json({code: 200, message: "File Uploaded Successfully."});
     });
 };
@@ -156,6 +159,7 @@ function triggerZipCreation(selectedUsers, selectedControls, username) {
                     var imageCopyArray = [];
                     for(var i in records) {
                         imageCopyArray.push(records[i]._id);
+                        imageCopyArray.push('50_' + records[i]._id);
                     }
                     var copyFolderPath = config.tempDirectory + '/' +keyId;
                     //Create a tempory directory to dump all files
