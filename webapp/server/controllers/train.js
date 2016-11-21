@@ -26,8 +26,8 @@ exports.uploadCropedImage = function (req, res) {
             var image_dimention = {
                 top_left_x: 0,
                 top_left_y: 0,
-                bottom_right_x: 200,
-                bottom_right_y: 200
+                bottom_right_x: req.body.width,
+                bottom_right_y: req.body.height
             };
             ImageMetadata.create(
                 {
