@@ -25,7 +25,7 @@
                     p.help-block Upload an Image to Annotate.
                 .crop-model-box
                     div(ng-show='cropper.croppedImage!=null')
-                        img(ng-src='{{cropper.croppedImage}}')
+                        img(ng-src='{{cropper.croppedImage}}', width='200px', height='200px')
                 div
                     h5 Cropped Image Dimention
                     | Width : {{findSize(bounds.left, bounds.right)}} px &nbsp;
@@ -49,5 +49,5 @@
             div
                 canvas#canvas(width='1024', height='1024', image-cropper='',
                 image='cropper.sourceImage', cropped-image='cropper.croppedImage',
-                crop-width='200', crop-height='200', min-width='10', min-height='10',
+                crop-width='findSize(bounds.left, bounds.right)', crop-height='findSize(bounds.top, bounds.bottom)', min-width='10', min-height='10',
                 keep-aspect='false', crop-area-bounds='bounds')
