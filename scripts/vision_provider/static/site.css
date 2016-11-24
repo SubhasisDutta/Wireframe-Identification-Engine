@@ -1,0 +1,50 @@
+
+
+.container {
+    max-width: 1600px;
+}
+
+.score {
+    font-size: 70%;
+    color: #777777;
+}
+
+.result_name {
+    font-weight: bold;
+}
+
+table {
+    margin-bottom: 0;
+}
+
+td {
+    border-bottom: 0;
+    vertical-align: top;
+}
+
+tr.raw_json td {
+    border-top: solid 1px #e1e1e1;
+}
+
+tr:first-child td {
+    border-top: 0;
+}
+
+hr {
+    margin: 20px 0;
+    border-top: solid 1px #c1c1c1;
+}
+
+h2.image_name {
+    font-size: 120%;
+    margin-bottom: 10px;
+}
+
+a.view_json {
+    font-size: 80%;
+}
+
+ul li, ol li {
+    margin-left: 30px;
+    list-style-position: outside;
+}
