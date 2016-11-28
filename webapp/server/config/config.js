@@ -12,7 +12,8 @@ module.exports = {
     awssec: 'XXX',
     awsBucket: 'wie-zip',
     s3Url: 'https://s3-us-west-2.amazonaws.com',
-    googleVisionKey : 'XXX'
+    googleVisionKey : 'XXX',
+    ibmBlumixKey : 'XXX'
   },
   production: {
     rootPath: rootPath,

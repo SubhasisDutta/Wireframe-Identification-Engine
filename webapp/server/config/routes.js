@@ -4,6 +4,7 @@ var auth = require('./auth'),
     page = require('../controllers/page'),
     train = require('../controllers/train'),
     googleVision = require('../controllers/googleVision'),
+    ibmWatson = require('../controllers/ibmWatson'),
     buildModel = require('../controllers/buildModel'),
     processWI = require('../controllers/processWI');
 
@@ -37,6 +38,8 @@ module.exports = function (app) {
     app.put('/api/analyze/googlevision/:id', googleVision.processGoogleVision);
     app.get('/api/getGoogleVisionResponse/:id',googleVision.getgoogleFullResponse);
 
+    app.put('/api/analyze/ibmimageanalyze/:id', ibmWatson.processInIBMWatson);
+    app.get('/api/getIBMWatsonResponse/:id',ibmWatson.getWatsonFullResponse);
 
     app.get('/partials/*', function (req, res) {
         res.render('../../public/app/modules/' + req.params[0]);

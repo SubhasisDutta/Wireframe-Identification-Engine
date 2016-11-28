@@ -21,6 +21,7 @@
                 th Actual Label
                 th Actual Text
                 th Analysis With Google Vision
+                th Analysis With IBM Watson
         tbody
             tr(ng-repeat="data in userContributeData.docs | filter:searchText | orderBy:sortOrder")
                 td
@@ -37,7 +38,14 @@
                     | Text - {{data.prediction_text_google}}
                     br
                     | Label - {{data.prediction_label_google}}
-
+                td(ng-hide='data.ibmWatsonAvailable')
+                    button.btn.btn-primary(ng-click="analyzeIBMWatson(data._id)") Analyse
+                td(ng-show='data.ibmWatsonAvailable')
+                    a(href='/api/getIBMWatsonResponse/{{data._id}}',target='_blank') JSON Response
+                    br
+                    | Text - {{data.prediction_text_ibm}}
+                    br
+                    | Label - {{data.prediction_label_ibm}}
                 td
                     button.btn.btn-primary(ng-click="deleteControl(data._id)") X
     pre Page : {{userContributeData.page}} / {{numPages}}

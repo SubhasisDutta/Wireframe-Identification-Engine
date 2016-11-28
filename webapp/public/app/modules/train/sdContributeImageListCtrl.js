@@ -21,8 +21,7 @@ function sdContributeImageLabelCtrl($scope, $resource, sdNotifier) {
                 var doc = userContributeDataResult.docs[i];
                 doc.googleAvailable = false;
                 doc.prediction_text_google = '';
-                doc.prediction_label_google = ''
-                var foundGoogleResult = false;
+                doc.prediction_label_google = '';
                 for(var j in doc.prediction_text) {
                     if(doc.prediction_text[j].provider === 'google_text'){
                         doc.googleAvailable = true;
@@ -30,6 +29,18 @@ function sdContributeImageLabelCtrl($scope, $resource, sdNotifier) {
                     }
                     if(doc.prediction_label[j].provider === 'google_label') {
                         doc.prediction_label_google = doc.prediction_label[j].result;
+                    }
+                }
+                doc.ibmWatsonAvailable = false;
+                doc.prediction_text_ibm = '';
+                doc.prediction_label_ibm = '';
+                for(var j in doc.prediction_text) {
+                    if(doc.prediction_text[j].provider === 'ibm_text'){
+                        doc.prediction_text_ibm = doc.prediction_text[j].result;
+                    }
+                    if(doc.prediction_label[j].provider === 'ibm_label') {
+                        doc.ibmWatsonAvailable = true;
+                        doc.prediction_label_ibm = doc.prediction_label[j].result;
                     }
                 }
             }
@@ -67,4 +78,12 @@ function sdContributeImageLabelCtrl($scope, $resource, sdNotifier) {
         });
     };
 
+    $scope.analyzeIBMWatson = function(imageId) {
+        var analyzeIBMWatson = new $resource('/api/analyze/ibmimageanalyze/:_id',
+            {_id: imageId},
+            {'update': {method: 'PUT'}});
+        analyzeIBMWatson.update().$promise.then(function(response) {
+            sdNotifier.notify(response.message);
+        });
+    };
 }
