@@ -3,6 +3,7 @@ var auth = require('./auth'),
     pages = require('../controllers/pages'),
     page = require('../controllers/page'),
     train = require('../controllers/train'),
+    googleVision = require('../controllers/googleVision'),
     buildModel = require('../controllers/buildModel'),
     processWI = require('../controllers/processWI');
 
@@ -33,6 +34,8 @@ module.exports = function (app) {
     app.post('/api/process/uploadcontrol/:id', auth.requiresApiLogin, processWI.uploadcontrol);
     app.put('/api/process/removeControl/:id', auth.requiresApiLogin, processWI.deleteControl);
 
+    app.put('/api/analyze/googlevision/:id', googleVision.processGoogleVision);
+    app.get('/api/getGoogleVisionResponse/:id',googleVision.getgoogleFullResponse);
 
 
     app.get('/partials/*', function (req, res) {

@@ -20,8 +20,7 @@
                 th User
                 th Actual Label
                 th Actual Text
-                th Predicted Label
-                th Predicted Text
+                th Analysis With Google Vision
         tbody
             tr(ng-repeat="data in userContributeData.docs | filter:searchText | orderBy:sortOrder")
                 td
@@ -30,14 +29,15 @@
                 td {{data.username}}
                 td {{data.actual_label}}
                 td {{data.actual_text}}
-                td(ng-if='data.prediction_label.length === 0')
-                |   &nbsp;
-                //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_label")
-                //|   {{item.provider}} -- {{item.result}}
-                td(ng-if='data.prediction_text.length === 0')
-                |   &nbsp;
-                //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_text")
-                //|   {{item.provider}} -- {{item.result}}
+                td(ng-hide='data.googleAvailable')
+                    button.btn.btn-primary(ng-click="analyzeGoogleVision(data._id)") Analyse
+                td(ng-show='data.googleAvailable')
+                    a(href='/api/getGoogleVisionResponse/{{data._id}}',target='_blank') JSON Response
+                    br
+                    | Text - {{data.prediction_text_google}}
+                    br
+                    | Label - {{data.prediction_label_google}}
+
                 td
                     button.btn.btn-primary(ng-click="deleteControl(data._id)") X
     pre Page : {{userContributeData.page}} / {{numPages}}

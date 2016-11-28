@@ -26,6 +26,7 @@ var imageMetadata = mongoose.Schema({
     actual_text: {type: String},
     prediction_label: [prediction],
     prediction_text: [prediction],
+    full_json_response: [prediction],
     image_dimention : position,
     object_width: {type: Number},
     object_height: {type: Number},

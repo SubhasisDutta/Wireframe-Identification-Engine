@@ -16,7 +16,25 @@ function sdContributeImageLabelCtrl($scope, $resource, sdNotifier) {
             pageNo = $scope.userContributeData.page;
         }
         var userContributeData = $resource("/api/contribute/userImages/" + pageNo + "/" + $scope.perPage);
-        $scope.userContributeData = userContributeData.get();
+        userContributeData.get().$promise.then(function(userContributeDataResult){
+            for(var i in userContributeDataResult.docs) {
+                var doc = userContributeDataResult.docs[i];
+                doc.googleAvailable = false;
+                doc.prediction_text_google = '';
+                doc.prediction_label_google = ''
+                var foundGoogleResult = false;
+                for(var j in doc.prediction_text) {
+                    if(doc.prediction_text[j].provider === 'google_text'){
+                        doc.googleAvailable = true;
+                        doc.prediction_text_google = doc.prediction_text[j].result;
+                    }
+                    if(doc.prediction_label[j].provider === 'google_label') {
+                        doc.prediction_label_google = doc.prediction_label[j].result;
+                    }
+                }
+            }
+            $scope.userContributeData = userContributeDataResult;
+        });
     }
     getResult();
 
@@ -38,6 +56,15 @@ function sdContributeImageLabelCtrl($scope, $resource, sdNotifier) {
                 getResult();
             }
         });
-    }
+    };
+
+    $scope.analyzeGoogleVision = function(imageId) {
+        var analyzeGoogleVision = new $resource('/api/analyze/googlevision/:_id',
+            {_id: imageId},
+            {'update': {method: 'PUT'}});
+        analyzeGoogleVision.update().$promise.then(function(response) {
+            sdNotifier.notify(response.message);
+        });
+    };
 
 }
