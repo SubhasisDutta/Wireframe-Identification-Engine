@@ -44,7 +44,8 @@ function triggerGoogleVisionProcess(imageId) {
                     "full_json_response": full_json_response,
                     "prediction_label": prediction_label,
                     "prediction_text": prediction_text
-                }
+                },
+                $set: { "uploaded_on" : new Date()}
             }, function (err) {
                 if (err) return console.log(err);
             });
