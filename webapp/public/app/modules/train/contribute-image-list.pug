@@ -31,7 +31,7 @@
                 td {{data.actual_label}}
                 td {{data.actual_text}}
                 td(ng-hide='data.googleAvailable')
-                    button.btn.btn-primary(ng-click="analyzeGoogleVision(data._id)") Analyse
+                    button.btn.btn-primary(ng-click="analyzeGoogleVision(data._id)") Analyze
                 td(ng-show='data.googleAvailable')
                     a(href='/api/getGoogleVisionResponse/{{data._id}}',target='_blank') JSON Response
                     br
@@ -39,7 +39,7 @@
                     br
                     | Label - {{data.prediction_label_google}}
                 td(ng-hide='data.ibmWatsonAvailable')
-                    button.btn.btn-primary(ng-click="analyzeIBMWatson(data._id)") Analyse
+                    button.btn.btn-primary(ng-click="analyzeIBMWatson(data._id)") Analyze
                 td(ng-show='data.ibmWatsonAvailable')
                     a(href='/api/getIBMWatsonResponse/{{data._id}}',target='_blank') JSON Response
                     br
