@@ -27,7 +27,10 @@ function triggerIBMWatsonVisionProcess(imageId) {
     });
 
     var params = {
-        images_file: fs.createReadStream(imagePath)
+        images_file: fs.createReadStream(imagePath),
+        classifier_ids: config.classifierId,
+        owners: ['me'],
+        threshold: 0.5
     };
     visual_recognition.classify(params, function(err, result) {
         if (err)
@@ -65,7 +68,7 @@ function getLabelFormat(response) {
     var result = '';
     var classifiers = response.images[0].classifiers;
     for( var i in classifiers) {
-        result = result + ' | Classifier : ' + classifiers[i].classifier_id + ' --- ';
+        //result = result + ' | Classifier : ' + classifiers[i].classifier_id + ' --- ';
         for(var j in classifiers[i].classes) {
             result = result + classifiers[i].classes[j].class + '(' + Math.round(Number(classifiers[i].classes[j].score) * 100) + '%), ';
         }

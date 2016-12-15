@@ -20,8 +20,8 @@
                 th User
                 th Actual Label
                 th Actual Text
-                th Analysis With Google Vision
-                th Analysis With IBM Watson
+                th Text Recognision
+                th Identification of Control
         tbody
             tr(ng-repeat="data in userContributeData.docs | filter:searchText | orderBy:sortOrder")
                 td
@@ -31,19 +31,15 @@
                 td {{data.actual_label}}
                 td {{data.actual_text}}
                 td(ng-hide='data.googleAvailable')
-                    button.btn.btn-primary(ng-click="analyzeGoogleVision(data._id)") Analyze
+                    button.btn.btn-primary(ng-click="analyzeGoogleVision(data._id)") Get Text
                 td(ng-show='data.googleAvailable')
                     a(href='/api/getGoogleVisionResponse/{{data._id}}',target='_blank') JSON Response
                     br
                     | Text - {{data.prediction_text_google}}
-                    br
-                    | Label - {{data.prediction_label_google}}
                 td(ng-hide='data.ibmWatsonAvailable')
-                    button.btn.btn-primary(ng-click="analyzeIBMWatson(data._id)") Analyze
+                    button.btn.btn-primary(ng-click="analyzeIBMWatson(data._id)") Get Label
                 td(ng-show='data.ibmWatsonAvailable')
                     a(href='/api/getIBMWatsonResponse/{{data._id}}',target='_blank') JSON Response
-                    br
-                    | Text - {{data.prediction_text_ibm}}
                     br
                     | Label - {{data.prediction_label_ibm}}
                 td
