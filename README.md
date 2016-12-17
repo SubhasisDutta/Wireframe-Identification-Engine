@@ -34,6 +34,7 @@ In its current state this app can help in:
 5. Perform OCR using Google Vision API.
 
 A sample of Image Classification to find the Text and the Control Type from an Image Page.
+![image](https://cloud.githubusercontent.com/assets/1586038/21286110/bcfd0f58-c3ff-11e6-9397-3c5819ee6dfc.png)
 
 
 # Dependency
