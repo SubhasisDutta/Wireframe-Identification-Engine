@@ -29,7 +29,7 @@ In its current state this app can help in:
 
 1. Collect training and testing data in the form of images and labels and store it in a database that can then be used for building training models.
 2. Allow user to annotate an image of a User Interface Design and extract information like position, Width and height of the identified UI components.
-3. Allow to run an Optical Character Recognition process on selected UI components and extract ant text information on them. 
+3. Allow to run an Optical Character Recognition process on selected UI components and extract ant text information on them with Tesseract. 
 4. Classify User Interface Components into their type using Deep Learning provided through IBM Watson.
 5. Perform OCR using Google Vision API.
 
