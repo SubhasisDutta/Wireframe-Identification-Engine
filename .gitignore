@@ -94,3 +94,4 @@ ENV/
 # Rope project settings
 .ropeproject
 IBM_watson_classifier
+Object Detection/.idea

@@ -1,18 +1,29 @@
 .container
   .jumbotron
-    h1 BUILD - Wireframe Identification Engine
+    h1 Wireframe Identification Engine
     p
-      | Welcome to BUILD - WIE! This tool is a concept demonstrator on a method to semi-automatically convert a wireframe image
+      | Welcome to WIE! This tool is a concept demonstrator to semi-autonomously convert a wireframe design image
       | to user interface code. By identifying the different user interface controls using various machine learning techniques
-      | and converting them to usable metadata which can be used by BUILD platform to generate freestyle prototype.
-      | Using this webapp a user can build model by accepting training data and constantly improve the platform by training and testing.
-
-  .row
-    .col-md-6
-      a.btn.btn-primary.home-button(href="/public") Public Pages with Identification Tags
-    .col-md-6
-      a.btn.btn-primary.home-button(href="/pages") All User Pages with Tags
-    .col-md-6
-      a.btn.btn-primary.home-button(href="/contribute/upload") Contribute Labeled Images and Retrain the Image Identification Model
-    .col-md-6
-      a.btn.btn-primary.home-button(href="/process/upload") Upload an Image Wireframe and Annotate To Identify the Control Properties
+      | and converting them to usable metadata which can be used on platform like
+      strong
+        a(href='//build.me' target='_blank')  SAP's BUILD
+      |  to generate freestyle prototype.
+      | Using this app a user can build training models by collecting data and constantly improve the
+      | classifier through reinforcement learning.
+    strong
+      ul
+        li
+          a(href='/public') Check out the Public Pages in which the position of the controls have been identified
+        li
+          a(href='/contribute/list') Analyze an image to identify the type/label and text written.
+        li
+          a(href='/contribute/upload') Upload wireframe and label controls for training data curation.
+          |  &nbsp;(Requires Login)
+        li
+          a(href='/modellist') Download image data sets for building training models.
+          | &nbsp;(Requires Login)
+        li
+          a(href='/process/upload') Upload an image and mark the controls you want to extract and identify.
+          | &nbsp;(Requires Login)
+        li
+          a(href='//github.com/SubhasisDutta/WireframeTagging' target='_blank') GITHUB : github.com/SubhasisDutta/WireframeTagging

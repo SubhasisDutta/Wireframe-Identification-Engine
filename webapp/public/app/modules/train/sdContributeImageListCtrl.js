@@ -5,7 +5,7 @@
 
 module.exports = sdContributeImageLabelCtrl;
 
-function sdContributeImageLabelCtrl($scope, $resource, sdNotifier) {
+function sdContributeImageLabelCtrl($scope, $resource, sdNotifier, $window, $timeout) {
     $scope.perPage = 25;
     $scope.maxSize = 5;
 
@@ -75,6 +75,9 @@ function sdContributeImageLabelCtrl($scope, $resource, sdNotifier) {
             {'update': {method: 'PUT'}});
         analyzeGoogleVision.update().$promise.then(function(response) {
             sdNotifier.notify(response.message);
+            $timeout(function(){
+                window.location.reload();
+            }, 6000);
         });
     };
 
@@ -84,6 +87,9 @@ function sdContributeImageLabelCtrl($scope, $resource, sdNotifier) {
             {'update': {method: 'PUT'}});
         analyzeIBMWatson.update().$promise.then(function(response) {
             sdNotifier.notify(response.message);
+            $timeout(function(){
+                window.location.reload();
+            }, 6000);
         });
     };
 }
