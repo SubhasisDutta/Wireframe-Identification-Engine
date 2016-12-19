@@ -17,6 +17,35 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
     $scope.wireframeData = {};
     var wmRes = $resource("/api/page/detail/:_id");
     wmRes.get({_id: $routeParams.id}, function (response) {
+
+        for(var i in response.controls) {
+            var doc = response.controls[i];
+            doc.googleAvailable = false;
+            doc.prediction_text_google = '';
+            doc.prediction_label_google = '';
+            for(var j in doc.prediction_text) {
+                if(doc.prediction_text[j].provider === 'google_text'){
+                    doc.googleAvailable = true;
+                    doc.prediction_text_google = doc.prediction_text[j].result;
+                }
+                if(doc.prediction_label[j].provider === 'google_label') {
+                    doc.prediction_label_google = doc.prediction_label[j].result;
+                }
+            }
+            doc.ibmWatsonAvailable = false;
+            doc.prediction_text_ibm = '';
+            doc.prediction_label_ibm = '';
+            for(var j in doc.prediction_text) {
+                if(doc.prediction_text[j].provider === 'ibm_text'){
+                    doc.prediction_text_ibm = doc.prediction_text[j].result;
+                }
+                if(doc.prediction_label[j].provider === 'ibm_label') {
+                    doc.ibmWatsonAvailable = true;
+                    doc.prediction_label_ibm = doc.prediction_label[j].result;
+                }
+            }
+        }
+
         $scope.wireframeMetadata = response;
         var url = '/api/page/image/' + $scope.wireframeMetadata.wireframeImageId;
         convertFileToDataURLviaFileReader(url, function (base64Img) {
@@ -27,21 +56,21 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
             //htmlcontent.load('/partials/process/annotate-canvas');
             //$compile(htmlcontent.contents())($scope);
         });
-
         printResponse($scope.wireframeMetadata);
     });
 
+
+
     function printResponse(metaDataList) {
-        //console.log(JSON.stringify(metaDataList, null, "    "));
-        for (var i in metaDataList.controls) {
-            console.log('controls ids: ' + i._id);
-        }
+        $scope.metadataFormatted = JSON.stringify(metaDataList, null, "    ");
+        console.log($scope.metadataFormatted);
     }
 
-    function generateMetaData(data) {
-        $scope.wireframeData = JSON.parse(data);
-        //sdContributeImageLabelCtrl.analyzeGoogleVision(data.controls._id)
-    }
+    // function generateMetaData() {
+    //     wmRes.get({_id: $routeParams.id}, function (response) {
+    //         $scope.controlMetadata = JSON.parse(response);
+    //     });
+    // }
 
 
     function convertFileToDataURLviaFileReader(url, callback) {
@@ -136,4 +165,38 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
             sdNotifier.notify(response.message);
         });
     };
+
+    $scope.analyzeAllControls = function () {
+        wmRes.get({_id: $routeParams.id}, function (response) {
+            var controlMetadata = response;
+            for (var data in controlMetadata.controls) {
+                analyzeIBMWatson(data._id);
+            }
+        });
+    };
+
+    $scope.analyzeGoogleVision = function(imageId) {
+        var analyzeGoogleVision = new $resource('/api/analyze/googlevision/:_id',
+            {_id: imageId},
+            {'update': {method: 'PUT'}});
+        analyzeGoogleVision.update().$promise.then(function(response) {
+            sdNotifier.notify(response.message);
+            $timeout(function(){
+                window.location.reload();
+            }, 6000);
+        });
+    };
+
+    $scope.analyzeIBMWatson = function(imageId) {
+        var analyzeIBMWatson = new $resource('/api/analyze/ibmimageanalyze/:_id',
+            {_id: imageId},
+            {'update': {method: 'PUT'}});
+        analyzeIBMWatson.update().$promise.then(function(response) {
+            sdNotifier.notify(response.message);
+            $timeout(function(){
+                window.location.reload();
+            }, 6000);
+        });
+    };
+
 }
