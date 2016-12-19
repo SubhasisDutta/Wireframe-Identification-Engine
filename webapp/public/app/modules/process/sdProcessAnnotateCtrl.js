@@ -14,6 +14,7 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
     $scope.bounds.right = 200;
     $scope.bounds.top = 0;
     $scope.bounds.bottom = 200;
+    $scope.wireframeData = {};
     var wmRes = $resource("/api/page/detail/:_id");
     wmRes.get({_id: $routeParams.id}, function (response) {
         $scope.wireframeMetadata = response;
@@ -26,7 +27,22 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
             //htmlcontent.load('/partials/process/annotate-canvas');
             //$compile(htmlcontent.contents())($scope);
         });
+
+        printResponse($scope.wireframeMetadata);
     });
+
+    function printResponse(metaDataList) {
+        //console.log(JSON.stringify(metaDataList, null, "    "));
+        for (var i in metaDataList.controls) {
+            console.log('controls ids: ' + i._id);
+        }
+    }
+
+    function generateMetaData(data) {
+        $scope.wireframeData = JSON.parse(data);
+        //sdContributeImageLabelCtrl.analyzeGoogleVision(data.controls._id)
+    }
+
 
     function convertFileToDataURLviaFileReader(url, callback) {
         var xhr = new XMLHttpRequest();

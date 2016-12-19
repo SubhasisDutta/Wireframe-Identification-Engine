@@ -5,7 +5,7 @@
 
 module.exports = sdContributeImageUploadCtrl;
 
-function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
+function sdContributeImageUploadCtrl($scope, Upload, sdNotifier, sdContributeImageListCtrl) {
     $scope.controlLabel = 'Text';
 
     $scope.cropper = {};
@@ -17,10 +17,15 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
     $scope.bounds.top = 0;
     $scope.bounds.bottom = 200;
 
+    $scope.imageMetadataList = {};
+
     $scope.findSize = function (a, b) {
         var c = Math.abs(a - b);
         return c < 10 ? 10: c;
     };
+
+    //sdContributeImageListCtrl.getResults();
+
 
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -35,11 +40,15 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
         controlText = controlText ? controlText : '';
         controlLabel = controlLabel ? controlLabel : 'Text';
         var imageFile = dataURLtoFile(cropedImage, 'a.png');
+        console.log('cropedImage: '+ cropedImage);
         Upload.upload({
             url: '/api/contribute/upload',
             data: {width: width, height: height, controlText: controlText, controlLabel: controlLabel, file: imageFile}
         }).then(function (response) {
             sdNotifier.notify(response.data.message);
         });
+
+        //sdContributeImageListCtrl.analyzeGoogleVision();
+        //imageMetadataList.append();
     }
 }
