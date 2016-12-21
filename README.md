@@ -5,6 +5,9 @@ This project is a concept demonstrator to semi-autonomously convert a wireframe 
 
 App Link : http://35.160.238.107:6060/
 
+# Blog Post
+http://subhasisproject.blogspot.com/2016/12/framework-for-conversion-of-user.html
+
 ### Demo app to help extract UI Component's information for converting Image Page to Freestyle Page.
 
 For most of the functions you will need to be logged in. 
