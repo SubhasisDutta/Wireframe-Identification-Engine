@@ -30,8 +30,7 @@
                     h5 Cropped Image Dimention
                     | Width : {{findSize(bounds.left, bounds.right)}} px &nbsp;
                     | Height : {{findSize(bounds.top, bounds.bottom)}} px
-                button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage, controlText," +
-                " controlLabel, findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom))") Submit
+                button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage, controlText, controlLabel, findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom))") Submit
         .col-md-6
             .form-group
                 label(for='inputText') Image Text (If Any)

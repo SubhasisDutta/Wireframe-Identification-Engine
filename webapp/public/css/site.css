@@ -71,3 +71,9 @@ footer p {
 .public-extra-margin {
   margin-top: 100px;
 }
+.preview-canvas {
+  border: 1px solid #000;
+  width: 1024px;
+  height: 1024px;
+  margin: 2% auto;
+}

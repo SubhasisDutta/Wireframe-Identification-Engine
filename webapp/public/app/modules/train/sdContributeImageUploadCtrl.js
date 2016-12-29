@@ -1,11 +1,11 @@
 /**
  * Created by subhasis on 11/1/16.
  */
-'use strict';
+ 'use strict';
 
-module.exports = sdContributeImageUploadCtrl;
+ module.exports = sdContributeImageUploadCtrl;
 
-function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
+ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
     $scope.controlLabel = 'Text';
 
     $scope.cropper = {};
@@ -19,12 +19,12 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
 
     $scope.findSize = function (a, b) {
         var c = Math.abs(a - b);
-        return c < 10 ? 10: c;
+        return (c < 10 ? 10: c);
     };
 
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
         while(n--){
             u8arr[n] = bstr.charCodeAt(n);
         }
@@ -41,5 +41,5 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
         }).then(function (response) {
             sdNotifier.notify(response.data.message);
         });
-    }
+    };
 }

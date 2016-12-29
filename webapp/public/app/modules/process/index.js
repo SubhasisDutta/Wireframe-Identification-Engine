@@ -12,3 +12,5 @@ modu.controller('sdProcessAnnotateCtrl', require('./sdProcessAnnotateCtrl'));
 modu.controller('sdProcessCropCtrl', require('./sdProcessCropCtrl'));
 modu.controller('sdProcessIdentifyCtrl', require('./sdProcessIdentifyCtrl'));
 modu.controller('sdProcessUploadCtrl', require('./sdProcessUploadCtrl'));
+modu.controller('sdPrototypePreviewCtrl', require('./sdPrototypePreviewCtrl'));
+modu.service('sdPrototypePreviewData', require('./services/sdPrototypePreviewData.service.js'));

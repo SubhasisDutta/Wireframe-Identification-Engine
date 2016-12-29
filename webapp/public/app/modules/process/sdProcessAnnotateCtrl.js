@@ -5,7 +5,8 @@
 
 module.exports = sdProcessAnnotateCtrl;
 
-function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resource) {
+function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resource, sdPrototypePreviewData) {
+
     $scope.cropper = {};
     $scope.cropper.sourceImage = null;
     $scope.cropper.croppedImage = null;
@@ -119,5 +120,118 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
         createZipResource.update().$promise.then(function(response) {
             sdNotifier.notify(response.message);
         });
+    };
+
+    var sampleData = [
+        {
+            _id: "5835f1e324a1b174060d125e",
+            actual_label: "Button",
+            actual_text: "Edit",
+            id: "5835f1e324a1b174060d125e",
+            image_type: "Model_Train",
+            prediction_label: [{provider: "google_label", result: "bag(91%), font(79%), product(78%), automotive exterior(73%), cap(60%), brand(60%), "}],
+            prediction_text: [{provider: "google_text", result: "Edit"}],
+            status: "Model_To_Approve",
+            uploaded_on: "2016-12-07T19:22:02.267Z",
+            username: "chaitusbwlr@gmail.com",
+            object_height:134,
+            object_width:240,
+            image_dimention:{top_left_x: 1026, top_left_y: 7, bottom_right_x: 1266, bottom_right_y: 141}
+        },
+        {
+            _id:"5835eaf224a1b174060d122e",
+            actual_label:"Button",
+            actual_text:"SUBMIT",
+            id:"5835eaf224a1b174060d122e",
+            image_type:"Model_Train",
+            prediction_label:[{provider:"google_label", result:"automotive exterior(75%), font(74%), product(73%), fashion accessory(67%), bag(66%), brand(60%), glasses(56%), "}],
+            prediction_text:[{result: "SUBMIT", provider: "google_text"}],
+            status:"Model_To_Approve",
+            uploaded_on:"2016-12-07T19:22:27.361Z",
+            username:"gaby.lui@sap.com",
+            object_height:121,
+            object_width:303,
+            image_dimention:{top_left_x: 470, top_left_y: 987, bottom_right_x: 773, bottom_right_y: 1108}
+        },
+        {
+            _id:"5835f18a24a1b174060d125c",
+            actual_label:"Table",
+            actual_text:"",
+            id:"5835f18a24a1b174060d125c",
+            image_type:"Model_Train",
+            prediction_label:[{provider:"google_label", result:"line(73%), font(68%), line art(61%), drawing(59%), shape(58%), "}],
+            prediction_text:[{result: "Date↵Sport↵Time↵", provider: "google_text"}],
+            status:"Model_To_Approve",
+            uploaded_on:"2016-12-13T18:44:09.478Z",
+            username:"chaitusbwlr@gmail.com",
+            object_height:481,
+            object_width:548,
+            image_dimention:{top_left_x: 17, top_left_y: 487, bottom_right_x: 565, bottom_right_y: 968}
+        },
+        {
+            _id:"5835ede024a1b174060d123e",
+            actual_label:"Text",
+            actual_text:"Name:",
+            id:"5835ede024a1b174060d123e",
+            image_type:"Model_Train",
+            prediction_label:[{provider:"google_label", result: "text(94%), logo(86%), font(85%), brand(60%), line(53%), "}],
+            prediction_text:[{result: "Name:↵", provider: "google_text"}],
+            status:"Model_To_Approve",
+            uploaded_on:"2016-12-13T18:55:19.703Z",
+            username:"chaitusbwlr@gmail.com",
+            object_height:105,
+            object_width:244,
+            image_dimention:{top_left_x: 332, top_left_y: 71, bottom_right_x: 576, bottom_right_y: 176}
+        },
+        {
+            _id:"5836069724a1b174060d12da",
+            actual_label:"Text",
+            actual_text:"Age:",
+            id:"5836069724a1b174060d12da",
+            image_type:"Model_Train",
+            prediction_label:[{provider:"google_label", result: "text(94%), logo(86%), font(85%), brand(60%), line(53%), "}],
+            prediction_text:[{result: "Age:↵", provider: "google_text"}],
+            status:"Model_To_Approve",
+            uploaded_on:"2016-12-13T18:55:19.703Z",
+            username:"chaitusbwlr@gmail.com",
+            object_height:104,
+            object_width:244,
+            image_dimention:{top_left_x: 332, top_left_y: 71, bottom_right_x: 576, bottom_right_y: 176}
+        },
+        {
+            _id:"583cc08524a1b174060d139d",
+            actual_label:"Icon",
+            actual_text:"",
+            id:"583cc08524a1b174060d139d",
+            image_type:"Model_Train",
+            prediction_label:[{provider:"google_label", result: "steering part(78%), wheel(75%), automotive exterior(71%), bicycle wheel(68%), steering wheel(65%), spoke(60%), circle(59%), automotive engine part(58%), rings(56%),"}],
+            prediction_text:[{result: "", provider: "google_text"}],
+            status:"Model_To_Approve",
+            uploaded_on:"2016-12-13T18:55:19.703Z",
+            username:"chaitusbwlr@gmail.com",
+            object_height:232,
+            object_width:250,
+            image_dimention:{top_left_x: 14, top_left_y: 73, bottom_right_x: 264, bottom_right_y: 305}
+        },
+        {
+            _id:"583cc15324a1b174060d13bb",
+            actual_label:"Chart",
+            actual_text:"",
+            id:"583cc15324a1b174060d13bb",
+            image_type:"Model_Train",
+            prediction_label:[{provider:"google_label", result: "product(75%), automotive exterior(75%), bicycle frame(68%), furniture(65%), rectangle(51%), "}],
+            prediction_text:[{result: "", provider: "google_text"}],
+            status:"Model_To_Approve",
+            uploaded_on:"2016-12-13T18:55:19.703Z",
+            username:"chaitusbwlr@gmail.com",
+            object_height:480,
+            object_width:548,
+            image_dimention:{top_left_x: 698, top_left_y: 497, bottom_right_x: 1246, bottom_right_y: 977}
+        }
+    ];
+
+    $scope.analyzePrototype = function() {
+        sdPrototypePreviewData.setControlData(sampleData);
+        window.location.href = "/prototypepreview";
     };
 }
