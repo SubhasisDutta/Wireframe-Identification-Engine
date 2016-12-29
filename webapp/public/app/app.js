@@ -69,7 +69,7 @@ app.config(function ($routeProvider, $locationProvider) {
         })
         .when('/contribute/list', {
             templateUrl: '/partials/train/contribute-image-list',
-            controller: 'sdContributeImageListCtrl', resolve: routeRoleChecks.user
+            controller: 'sdContributeImageListCtrl'
         })
         .when('/modellist', {
             templateUrl: '/partials/train/model-list',

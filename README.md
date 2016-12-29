@@ -1,112 +1,53 @@
 # WireframeTagging
-This project will process an image or set of images and identify the properties of different User or Annotated Controls depicted in the Wireframe Image.  
+This project is a concept demonstrator to semi-autonomously convert a wireframe design image to user interface code.  
+
+# Demo
+
+App Link : http://35.160.238.107:6060/
+
+# Blog Post
+http://subhasisproject.blogspot.com/2016/12/framework-for-conversion-of-user.html
+
+### Demo app to help extract UI Component's information for converting Image Page to Freestyle Page.
+
+For most of the functions you will need to be logged in. 
+You can either create a new account 
+(During Sign Up Email is the username)
+
+Currently the following functions have been implemented:
+
+1. Upload an image and crop controls and label them. This will be used to build our training data.
+         (Url: http://35.160.238.107:6060/contribute/upload) 
+2. See the list of controls available as training data set.
+         (URL: http://35.160.238.107:6060/contribute/list )
+3. Upload an Image Page and crop the relevant part that needs to be considered as a Low-Fidelity Page. Currently please upload image with dimension less than 1500 px. (http://35.160.238.107:6060/process/upload)
+4. After the Image is uploaded, the image can be annotated by marking the area from which we want controls to be identified. (http://35.160.238.107:6060/process/annotate/5829199cb7780122ecf8246f )
+_Please refresh this page if the canvas does not load the image after some time._
+5. Access all Image Pages Uploaded by a user. (http://35.160.238.107:6060/pages )
+6. Access all Images Pages Marked as Public. (http://35.160.238.107:6060/public ) [No Login Required]
+7. View the annotated Image Page along with Controls listed. After we have integrated the OCR and Object Detection process we will display it in this page.(http://35.160.238.107:6060/pagedetail/5829199cb7780122ecf8246f )
+
+A Freestyle Page created in BUILD based on Image dimension obtained from this web App. (https://standard.build.me/api/projects/6f4f7e0f2acdb33d0cec176c/prototype/snapshot/latest/index.html#/14790995350785238_S1 ) 
+
+In its current state this app can help in:
+
+1. Collect training and testing data in the form of images and labels and store it in a database that can then be used for building training models.
+2. Allow user to annotate an image of a User Interface Design and extract information like position, Width and height of the identified UI components.
+3. Allow to run an Optical Character Recognition process on selected UI components and extract ant text information on them with Tesseract. 
+4. Classify User Interface Components into their type using Deep Learning provided through IBM Watson.
+5. Perform OCR using Google Vision API.
+
+A sample of Image Classification to find the Text and the Control Type from an Image Page.
+![image](https://cloud.githubusercontent.com/assets/1586038/21286110/bcfd0f58-c3ff-11e6-9397-3c5819ee6dfc.png)
+
 
 # Dependency
+```
+NodeJs, MongoDB, Amazon S3
+```
 
 ### Currently the system is only tested in Ubuntu.
 
-#### Setup Tesseract
-To install Tesseract use :
-```
-sudo apt install tesseract-ocr
-```
-Set the Environment Variable in /etc/environment or ~ .bashrc
-```
-export TESSDATA_PREFIX=’/usr/share/tesseract-ocr/tessdata’
-export NODE_ENV = "development"
-```
-To use tesseract independently:
-```
-tesseract <location of the input image> <location and file name of where the txt file will be created>
-```
-TODO: Need to see how to integrate with direct input from database and direct output to node
- for now use the bash shell way
-
-#### Setup and install Tensorflow
-Python 2.7 should be set as default python, check with
-```
-$ python -v
-```
-a. Install pip :
-```
-$ sudo apt-get install python-pip python-dev
-```
-b. Based on hardware select binary:
-For Ubuntu/Linux 64-bit, CPU only, Python 2.7
-```
-$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc1-cp27-none-linux_x86_64.whl
-```
-c. Install Tensor flow using pip
-```
-$ pip install --upgrade $TF_BINARY_URL
-```
-d. Check tensorflow is installed in location
-   /usr/local/lib/python2.7/dist-packages/tensorflow
-
-#### Setup and install Mongo DB
-Ref : https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-16-04
-
-a. Get Mongodb repo Key
-```    
-$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-```
-b. Add to apt-get
-```    
-$ echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-$ sudo apt-get update
-$ sudo apt-get install -y mongodb-org
-```
-c. Create a service for MongoDB
-```
-$ sudo nano /etc/systemd/system/mongodb.service
-```
-Paste the below
-```	
-[Unit]
-Description=High-performance, schema-free document-oriented database
-After=network.target
-
-[Service]
-User=mongodb
-ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf
-
-[Install]
-WantedBy=multi-user.target
-```	
-d. Start Service
-```
-$ sudo systemctl start mongodb
-```
-e. Check Service Status
-```    
-$ sudo systemctl status mongodb
-```
-f. Enable MongoDB when System Starts
-```    
-$ sudo systemctl enable mongodb
-```
-#### Setup RoboMongo (for development)
-Download Zip and Extract to use bin/robomongo
-#### Install Node JS
-Ref : http://tecadmin.net/install-latest-nodejs-npm-on-ubuntu/#
-```	
-$ sudo apt-get install python-software-properties
-$ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-$ sudo apt-get install nodejs
-```	
-
-#### Install Git
-```
-$ sudo apt-get install git
-```
-
-#### Install Global node packages
-```	
-$ sudo npm install -g bower
-$ sudo npm install -g nodemon
-$ sudo npm install -g forever
-$ sudo npm install -g gulp
-```
 
 #### Start the Mongo DB Server as per setup and configure it in
 [webapp/server/config/config.js](webapp/server/config/config.js)

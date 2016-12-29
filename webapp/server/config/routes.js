@@ -22,7 +22,7 @@ module.exports = function (app) {
     app.put('/api/process/createdownloadzip/:id',auth.requiresApiLogin, page.createZip);
 
     app.post('/api/contribute/upload', auth.requiresApiLogin, train.uploadCropedImage);
-    app.get('/api/contribute/userImages/:pageno/:limit',auth.requiresApiLogin, train.getUserModelList);
+    app.get('/api/contribute/userImages/:pageno/:limit', train.getUserModelList);
     app.put('/api/contribute/removeControl/:id', auth.requiresApiLogin, train.deleteControl);
     app.get('/api/modeldownloadlist/:pageno/:limit',auth.requiresApiLogin, train.getModelDownloadList);
     app.put('/api/train/createdownloadzip',auth.requiresApiLogin, train.createZip);

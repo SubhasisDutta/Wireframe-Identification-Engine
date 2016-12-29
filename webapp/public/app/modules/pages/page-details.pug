@@ -22,11 +22,9 @@
                         th No#
                         th Control
                         th Upload Date
-                        th Control Dimention
+                        th Control Dimension
                         th Control Position
-                        th Actual Lavel
-                        th Actual Text
-                        th Predicted Lable
+                        th Predicted Label
                         th Predicted Text
                 tbody
                     tr(ng-repeat="data in wireframeMetadata.controls | orderBy:-uploaded_on")
@@ -44,13 +42,15 @@
                            | Bottom-Right-X: {{data.image_dimention.bottom_right_x}} ,
                            br
                            | Bottom-Right-Y: {{data.image_dimention.bottom_right_y}}
-                        td {{data.actual_label}}
-                        td {{data.actual_text}}
-                        td(ng-if='data.prediction_label.length === 0')
-                        |   &nbsp;
-                        //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_label")
-                        //|   {{item.provider}} -- {{item.result}}
-                        td(ng-if='data.prediction_text.length === 0')
-                        |   &nbsp;
-                        //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_text")
-                        //|   {{item.provider}} -- {{item.result}}
+                        td(ng-hide='data.googleAvailable')
+                            button.btn.btn-primary(ng-click="analyzeGoogleVision(data._id)") Get Text
+                        td(ng-show='data.googleAvailable')
+                            a(href='/api/getGoogleVisionResponse/{{data._id}}',target='_blank') JSON Response
+                            br
+                            | Text - {{data.prediction_text_google}}
+                        td(ng-hide='data.ibmWatsonAvailable')
+                            button.btn.btn-primary(ng-click="analyzeIBMWatson(data._id)") Get Label
+                        td(ng-show='data.ibmWatsonAvailable')
+                            a(href='/api/getIBMWatsonResponse/{{data._id}}',target='_blank') JSON Response
+                            br
+                            | Label - {{data.prediction_label_ibm}}
