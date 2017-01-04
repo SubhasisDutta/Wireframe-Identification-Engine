@@ -17,8 +17,6 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
     $scope.bounds.top = 0;
     $scope.bounds.bottom = 200;
 
-    $scope.imageMetadataList = {};
-
     $scope.findSize = function (a, b) {
         var c = Math.abs(a - b);
         return c < 10 ? 10: c;
@@ -38,7 +36,6 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
         controlText = controlText ? controlText : '';
         controlLabel = controlLabel ? controlLabel : 'Text';
         var imageFile = dataURLtoFile(cropedImage, 'a.png');
-        console.log('cropedImage: '+ cropedImage);
         Upload.upload({
             url: '/api/contribute/upload',
             data: {width: width, height: height, controlText: controlText, controlLabel: controlLabel, file: imageFile}
