@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60aa7bf1-66b0-46eb-81df-d372db4eb0a8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/public/app/modules/process/sdProcessAnnotateCtrl.js" afterPath="$PROJECT_DIR$/webapp/public/app/modules/process/sdProcessAnnotateCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/server/config/config.js" afterPath="$PROJECT_DIR$/webapp/server/config/config.js" />
     </list>
     <ignored path="WireframeTagging.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,7 +35,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sdProcessAnnotateCtrl.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sdProcessAnnotateCtrl.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/public/app/modules/process/sdProcessAnnotateCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-810">
@@ -66,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="config.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webapp/server/config/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+            <state relative-caret-position="165">
+              <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -87,8 +86,8 @@
         <option value="$PROJECT_DIR$/webapp/public/app/modules/train/sdContributeImageListCtrl.js" />
         <option value="$PROJECT_DIR$/webapp/public/app/modules/train/sdContributeImageUploadCtrl.js" />
         <option value="$PROJECT_DIR$/webapp/public/app/modules/process/annotate-wireframe.pug" />
-        <option value="$PROJECT_DIR$/webapp/server/config/config.js" />
         <option value="$PROJECT_DIR$/webapp/public/app/modules/process/sdProcessAnnotateCtrl.js" />
+        <option value="$PROJECT_DIR$/webapp/server/config/config.js" />
       </list>
     </option>
   </component>
@@ -391,12 +390,12 @@
       <workItem from="1482171680515" duration="5602000" />
       <workItem from="1482186623683" duration="28000" />
       <workItem from="1483484516196" duration="2604000" />
-      <workItem from="1483554815229" duration="533000" />
+      <workItem from="1483554815229" duration="666000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24786000" />
+    <option name="totallyTimeSpent" value="24919000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2140" y="-213" width="1371" height="1372" extended-state="0" />
@@ -764,18 +763,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/server/config/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webapp/public/app/modules/process/sdProcessAnnotateCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-810">
           <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/server/config/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
           <folding />
         </state>
       </provider>
