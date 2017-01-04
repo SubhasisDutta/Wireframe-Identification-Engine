@@ -5,7 +5,7 @@
 
 module.exports = sdContributeImageUploadCtrl;
 
-function sdContributeImageUploadCtrl($scope, Upload, sdNotifier, sdContributeImageListCtrl) {
+function sdContributeImageUploadCtrl($scope, Upload, sdNotifier) {
     $scope.controlLabel = 'Text';
 
     $scope.cropper = {};
@@ -23,8 +23,6 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier, sdContributeIma
         var c = Math.abs(a - b);
         return c < 10 ? 10: c;
     };
-
-    //sdContributeImageListCtrl.getResults();
 
 
     function dataURLtoFile(dataurl, filename) {
@@ -48,7 +46,5 @@ function sdContributeImageUploadCtrl($scope, Upload, sdNotifier, sdContributeIma
             sdNotifier.notify(response.data.message);
         });
 
-        //sdContributeImageListCtrl.analyzeGoogleVision();
-        //imageMetadataList.append();
     }
 }
