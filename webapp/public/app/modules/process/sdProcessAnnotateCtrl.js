@@ -5,7 +5,7 @@
 
 module.exports = sdProcessAnnotateCtrl;
 
-function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resource) {
+function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resource, $timeout) {
     $scope.cropper = {};
     $scope.cropper.sourceImage = null;
     $scope.cropper.croppedImage = null;
@@ -66,11 +66,6 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
         console.log($scope.metadataFormatted);
     }
 
-    // function generateMetaData() {
-    //     wmRes.get({_id: $routeParams.id}, function (response) {
-    //         $scope.controlMetadata = JSON.parse(response);
-    //     });
-    // }
 
 
     function convertFileToDataURLviaFileReader(url, callback) {
@@ -169,8 +164,13 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
     $scope.analyzeAllControls = function () {
         wmRes.get({_id: $routeParams.id}, function (response) {
             var controlMetadata = response;
-            for (var data in controlMetadata.controls) {
-                analyzeIBMWatson(data._id);
+            try {
+                controlMetadata.controls.forEach(function (control) {
+                    $scope.analyzeGoogleVision(control._id);
+                    $scope.analyzeIBMWatson(control._id);
+                });
+            } catch (e) {
+                console.log(e);
             }
         });
     };
@@ -188,6 +188,7 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
     };
 
     $scope.analyzeIBMWatson = function(imageId) {
+        console.log(imageId);
         var analyzeIBMWatson = new $resource('/api/analyze/ibmimageanalyze/:_id',
             {_id: imageId},
             {'update': {method: 'PUT'}});
@@ -196,6 +197,8 @@ function sdProcessAnnotateCtrl($scope, Upload, sdNotifier, $routeParams, $resour
             $timeout(function(){
                 window.location.reload();
             }, 6000);
+        }).catch(function(response) {
+            console.log(response);
         });
     };
 
