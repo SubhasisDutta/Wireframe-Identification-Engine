@@ -64,12 +64,24 @@
                         td {{data.status}}
                         td {{data.actual_label}}
                         td {{data.actual_text}}
-                        td(ng-if='data.prediction_label.length === 0')
-                        |   &nbsp;
+                        td(ng-hide='data.googleAvailable')
+                            button.btn.btn-primary(ng-click="analyzeGoogleVision(data._id)") Get Text
+                        td(ng-show='data.googleAvailable')
+                            a(href='/api/getGoogleVisionResponse/{{data._id}}',target='_blank') JSON Response
+                            br
+                            | Text - {{data.prediction_text_google}}
+                        td(ng-hide='data.ibmWatsonAvailable')
+                            button.btn.btn-primary(ng-click="analyzeIBMWatson(data._id)") Get Label
+                        td(ng-show='data.ibmWatsonAvailable')
+                            a(href='/api/getIBMWatsonResponse/{{data._id}}',target='_blank') JSON Response
+                            br
+                            | Label - {{data.prediction_label_ibm}}
+                        //td(ng-if='data.prediction_label.length === 0')
+                        //|   &nbsp;
                         //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_label")
                         //|   {{item.provider}} -- {{item.result}}
-                        td(ng-if='data.prediction_text.length === 0')
-                        |   &nbsp;
+                        //td(ng-if='data.prediction_text.length === 0')
+                        //|   &nbsp;
                         //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_text")
                         //|   {{item.provider}} -- {{item.result}}
                         td
