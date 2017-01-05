@@ -8,7 +8,7 @@ module.exports = sdPrototypePreviewData;
 
 function sdPrototypePreviewData() {
 
-    var controlData = [];
+    var controlData = {};
 
     function getControlData() {
         return controlData;
