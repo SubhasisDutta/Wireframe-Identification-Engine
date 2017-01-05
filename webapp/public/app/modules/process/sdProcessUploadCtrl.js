@@ -5,7 +5,7 @@
 
 module.exports = sdProcessUploadCtrl;
 
-function sdProcessUploadCtrl($scope, Upload, sdNotifier, $location, sdIdentity) {
+function sdProcessUploadCtrl($scope, Upload, sdNotifier, $location, sdIdentity, $window) {
     $scope.cropper = {};
     $scope.cropper.sourceImage = null;
     $scope.cropper.croppedImage = null;
@@ -45,7 +45,7 @@ function sdProcessUploadCtrl($scope, Upload, sdNotifier, $location, sdIdentity) 
         }).then(function (response) {
             sdNotifier.notify(response.data.message);
             if (response.data.code === 200) {
-                $location.path('/process/annotate/' + response.data.id);
+                $window.location.href = '/process/annotate/' + response.data.id;
             }
         });
     }
