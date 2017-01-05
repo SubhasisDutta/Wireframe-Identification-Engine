@@ -95,3 +95,5 @@ ENV/
 .ropeproject
 
 Object Detection/.idea
+
+.idea
