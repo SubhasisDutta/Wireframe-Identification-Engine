@@ -173,6 +173,8 @@ function sdProcessAnnotateCtrl($scope, $location, Upload, sdNotifier, $routePara
             } catch (e) {
                 console.log(e);
             }
+            sdPrototypePreviewData.setControlData($scope.wireframeMetadata);
+            $location.path('/prototypepreview');
         });
     };
 
@@ -182,9 +184,9 @@ function sdProcessAnnotateCtrl($scope, $location, Upload, sdNotifier, $routePara
             {'update': {method: 'PUT'}});
         analyzeGoogleVision.update().$promise.then(function(response) {
             sdNotifier.notify(response.message);
-            $timeout(function(){
-                window.location.reload();
-            }, 6000);
+            window.location.reload();
+        }).catch(function(response) {
+            console.log(response);
         });
     };
 
@@ -195,9 +197,7 @@ function sdProcessAnnotateCtrl($scope, $location, Upload, sdNotifier, $routePara
             {'update': {method: 'PUT'}});
         analyzeIBMWatson.update().$promise.then(function(response) {
             sdNotifier.notify(response.message);
-            $timeout(function(){
-                window.location.reload();
-            }, 6000);
+            window.location.reload();
         }).catch(function(response) {
             console.log(response);
         });
