@@ -87,11 +87,21 @@ gulp.task('js-bundle', function () {
     //    b.external(id);
     //});
 
-    var stream = b.bundle().pipe(source('bundle.js'));
+    var stream = b
+        .bundle()
+        .on('error', function(err){
+            // print the error (can replace with gulp-util)
+            console.log(err.message);
+            // end this stream
+            this.emit('end');
+        })
+        .pipe(source('bundle.js'));
 
     // pipe additional tasks here (for eg: minifying / uglifying, etc)
     // remember to turn off name-mangling if needed when uglifying
 
+    // stream.pipe(streamify(ngAnnotate()));
+    // stream.pipe(streamify(uglify({mangle: false})));
     stream.pipe(gulp.dest(paths.dist));
 
     return stream;

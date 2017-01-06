@@ -79,6 +79,10 @@ app.config(function ($routeProvider, $locationProvider) {
             templateUrl: '/partials/train/rebuild-model',
             controller: 'sdRebuildCtrl', resolve: routeRoleChecks.admin
         })
+        .when('/prototypepreview', {
+            templateUrl: '/partials/process/prototype-preview',
+            controller: 'sdPrototypePreviewCtrl', resolve: routeRoleChecks.user
+        })
         .when('/process/upload', {
             templateUrl: '/partials/process/upload-wireframe',
             controller: 'sdProcessUploadCtrl', resolve: routeRoleChecks.user
