@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
 body
   padding-top 69px
-  background-color #f2f2f2
+  background-color #F7F7F7
+  font-family: 'Roboto', sans-serif;
 
 div.navbar-fixed-top
   background-color #073053
@@ -8,12 +11,6 @@ div.navbar-fixed-top
 
 a.navbar-link
   color #ffffff
-
-.navbar-header a.navbar-brand
-  margin-top -15px
-  margin-bottom -20px
-  h6
-    color #ccc
 
 footer
   padding-left 15px
@@ -86,3 +83,28 @@ thead
   font-weight 500
 table
   border 1px solid #e6e6e6
+a.tile
+  text-decoration none
+  background-color #ffffff
+  box-shadow 0 1px 3px 0 rgba(0,0,0,.2)
+  border-radius 10px
+  padding 10px 15px
+  margin 8px 10px
+  transition-property transform
+  transition-duration 0.25s
+  transition-timing-function ease
+a.tile:hover
+  cursor: pointer
+  -ms-transform scale(1.05, 1.05)
+  -webkit-transform scale(1.05, 1.05)
+  transform scale(1.05, 1.05)
+div.tile-row
+  margin 0 0
+img.tile-img
+  max-width 100%
+  height 100px
+  margin 15px 80px 5px 80px
+p.tile-text
+  color #333333
+h2.tile-title
+  color #f06b50

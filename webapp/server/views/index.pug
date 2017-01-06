@@ -2,22 +2,19 @@ extends ../includes/layout
 
 block main-content
   .navbar.navbar-inverse.navbar-fixed-top
-    .container
-      .navbar-header
-        a.navbar-brand(href="/") WIE
-          h6 Wireframe Identification Engine
-      .navbar-collapse.collapse
-        ul.nav.navbar-nav
-          li
-            a(href="/") Home
-          li
-            a(href="/public") Public Pages
-          li
-            a(href="/pages") Your Pages
-          li
-            a(href="/contribute/upload") Contribute
-          li
-            a(href="/process/upload") Identify
+    .navbar-header
+      a.navbar-brand(href="/") WIE
+    .navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li
+          a(href="/process/upload") CONVERT
+        li
+          a(href="/contribute/upload") TRAIN
+        li
+          a(href="/pages") PROTOTYPES
+        li
+          a(href="/public") PUBLIC
+
         div(ng-include="'/partials/account/navbar-login'")
 
   section.content
