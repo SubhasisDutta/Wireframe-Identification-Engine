@@ -4,18 +4,57 @@ body {
   background-color: #f7f7f7;
   font-family: 'Roboto', sans-serif;
 }
+.content {
+  margin-top: 50px;
+}
 div.navbar-fixed-top {
   background-color: #073053;
   color: #fff;
+  padding: 10px 0;
+  margin-bottom: 50px;
+}
+.navbar-header {
+  margin: 0 10px 0 10px;
 }
 a.navbar-link {
   color: #fff;
+  background-color: #073053;
+  transition: all 0.2s;
+  margin: 0 5px;
+}
+ul.nav>li>a.navbar-link:hover,
+ul.nav>li>a.navbar-link:active,
+ul.nav>li>a.navbar-link:focus {
+  box-shadow: inset 0 -5px 6px -5px #fff;
+  background-color: #073053;
+}
+.navbar-signin {
+  float: right !important;
+}
+a.navbar-btn-signin {
+  color: #fff;
+  background-color: #c65627;
+}
+a.navbar-btn-signin:hover {
+  color: #fff;
+  background-color: #aa4b22;
+}
+a.navbar-btn {
+  margin: 0 0 0 10px;
+}
+a.navbar-profile {
+  color: #fff;
+  background-color: #073053;
+}
+ul.nav>li>a.navbar-profile:hover,
+ul.nav>li>a.navbar-profile:active,
+ul.nav>li>a.navbar-profile:focus {
+  color: #c65627;
+  background-color: #073053;
 }
 footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-footer p {
+  margin-top: 50px;
+  padding: 20px 0;
   border-top: 1px solid #d7e0e2;
 }
 .navbar-form .form-group {
@@ -92,6 +131,7 @@ div.preview-canvas-wrapper {
   box-shadow: 10px 10px 5px #ccc;
   background-color: #fff;
   position: relative;
+  overflow: scroll;
 }
 thead {
   background-color: #e6e6e6;
