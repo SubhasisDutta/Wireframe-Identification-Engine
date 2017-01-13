@@ -1,38 +1,43 @@
 .container.top-padding-med
-    .pull-right
-        form.form-inline
-            .form-group
-                input.form-control(ng-model="searchText", placeholder="Filter")
-            .form-group.margin-left-med
-                select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+    .div
+        .proto-div
+            h1 My Prototypes
+    .div.top-padding-lg
+        .pull-right.bottom-padding-lg
+            form.form-inline
+                .form-group
+                    input.form-control(ng-model="searchText", placeholder="Filter")
+                .form-group.margin-left-med
+                    select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+
+        table.table.table-hover.table-striped.table-condensed.padding-top-lg
+            thead
+                tr
+                    th Wireframe
+                    th Title
+                    th Upload Date
+                    th Width
+                    th Height
+                    th No of Controls
+                    th Acess Type
+                    th Edit
+                    th Remove
+            tbody
+                tr(ng-repeat="data in userWireframes.docs | filter:searchText | orderBy:sortOrder")
+                    td
+                        img.model-image-box(ng-src='/api/page/image/{{data.wireframeImageId}}?ts=50')
+                    td
+                        a(href='/pagedetail/{{data._id}}') {{data.title}}
+                    td {{data.uploaded_on | date}}
+                    td {{data.wireframe_width}} px
+                    td {{data.wireframe_height}} px
+                    td {{data.controls.length}}
+                    td {{data.acessType}}
+                    td
+                        button.btn.btn-primary(ng-click="editControl(data._id)") Edit
+                    td
+                        button.btn.btn-primary(ng-click="deleteControl(data._id)") X
         ul.pagination-sm(uib-pagination, total-items='userWireframes.total',
         max-size='maxSize', ng-model='userWireframes.page', num-pages='numPages', items-per-page='perPage'
         boundary-link-numbers='true', force-ellipses='true', rotate='false', ng-change='pageChanged()')
-    table.table.table-hover.table-striped.table-condensed
-        thead
-            tr
-                th Wireframe
-                th Title
-                th Upload Date
-                th Width
-                th Height
-                th No of Controls
-                th Acess Type
-                th Edit
-                th Remove
-        tbody
-            tr(ng-repeat="data in userWireframes.docs | filter:searchText | orderBy:sortOrder")
-                td
-                    img.model-image-box(ng-src='/api/page/image/{{data.wireframeImageId}}?ts=50')
-                td
-                    a(href='/pagedetail/{{data._id}}') {{data.title}}
-                td {{data.uploaded_on | date}}
-                td {{data.wireframe_width}} px
-                td {{data.wireframe_height}} px
-                td {{data.controls.length}}
-                td {{data.acessType}}
-                td
-                    button.btn.btn-primary(ng-click="editControl(data._id)") Edit
-                td
-                    button.btn.btn-primary(ng-click="deleteControl(data._id)") X
-    pre Page : {{userWireframes.page}} / {{numPages}}
+        pre Page : {{userWireframes.page}} / {{numPages}}
