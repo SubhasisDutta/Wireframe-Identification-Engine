@@ -2,6 +2,7 @@
 
 global.jQuery = require('jquery');
 
+require('jquery');
 require('bootstrap');
 
 require('angular');

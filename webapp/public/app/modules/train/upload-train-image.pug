@@ -1,52 +1,85 @@
 //
    Created by subhasis on 11/1/16.
+//.container
+    //.row
+    //    .col-md-10
+    //        h2 Add images into the knowledge base.
+            //p
+            //    | Few restrictions on the Croped Image:
+            //    ul
+            //        li The Croped image will be converted to a 200 X 200 size Image.
+            //        li Provide the Text in the image (if any).
+            //        li Provide a Label for the Croped Image. (Required)
+            //        li For best results load images within size 1024 X 1024
+        //.col-md-2
+        //    a.btn.btn-primary(href='/contribute/list') Go To Upload List
+        //    a.btn.btn-primary(href='/modellist') Go To Data Download List
+    //form(name="modelDataUpload")
+    //    .col-md-6
+    //        .form-group
+    //            label(for='inputText') Image Text (If Any)
+    //            input#inputText.form-control(type='text', placeholder='Image Text', ng-model='controlText')
+    //            label(for='labelSelect') Identify Label For Croped Image *
+    //            select#labelSelect.form-control(ng-model='controlLabel')
+    //                option Text
+    //                option Button
+    //                option Chart
+    //                option Image
+    //                option Icon
+    //                option Table
+
+
 .container
     .row
         .col-md-10
-            h2 Add images into the knowledge base.
-            p
-                | Few restrictions on the Croped Image:
-                ul
-                    li The Croped image will be converted to a 200 X 200 size Image.
-                    li Provide the Text in the image (if any).
-                    li Provide a Label for the Croped Image. (Required)
-                    li For best results load images within size 1024 X 1024
-        .col-md-2
-            a.btn.btn-primary(href='/contribute/list') Go To Upload List
-            br
-            a.btn.btn-primary(href='/modellist') Go To Data Download List
-    form.form-horizontal.row(name="modelDataUpload")
-        .col-md-6
-            div
-                .form-group
-                    label(for='InputFile') Source Image
-                    input#inputFile.btn.btn-primary(type='file', img-cropper-fileread='',
-                    image='cropper.sourceImage')
-                    p.help-block Upload an Image to Annotate.
-                .crop-model-box
-                    div(ng-show='cropper.croppedImage!=null')
-                        img(ng-src='{{cropper.croppedImage}}', width='200px', height='200px')
-                div
-                    h5 Cropped Image Dimention
-                    | Width : {{findSize(bounds.left, bounds.right)}} px &nbsp;
-                    | Height : {{findSize(bounds.top, bounds.bottom)}} px
-                button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage, controlText, controlLabel, findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom))") Submit
-        .col-md-6
-            .form-group
-                label(for='inputText') Image Text (If Any)
-                input#inputText.form-control(type='text', placeholder='Image Text', ng-model='controlText')
-            label(for='labelSelect') Identify Label For Croped Image *
-            select#labelSelect.form-control(ng-model='controlLabel')
-                option Text
-                option Button
-                option Chart
-                option Image
-                option Icon
-                option Table
-    .row
-        .col-md-12
-            div
-                canvas#canvas(width='1024', height='1024', image-cropper='',
-                image='cropper.sourceImage', cropped-image='cropper.croppedImage',
-                crop-width='findSize(bounds.left, bounds.right)', crop-height='findSize(bounds.top, bounds.bottom)', min-width='10', min-height='10',
-                keep-aspect='false', crop-area-bounds='bounds')
+            h2.train-title Train Data Models
+    form(name="modelDataUpload")
+        .row.upload-section.tile
+                .col-md-1
+                    h1.section-number 1
+                .col-md-8
+                    .row.tile-row
+                        h2.tile-title Upload
+                    .row.tile-row
+                        h5.tile-text Upload your image
+                        input#inputFile(type='file', img-cropper-fileread='', image='cropper.sourceImage')
+        .row
+            .col-md-10.col-md-offset-1.upload-separator
+        .row.upload-section.tile
+            .row.info-row
+                .col-md-1
+                    h1.section-number 2
+                .col-md-4
+                    .row.tile-row
+                        h2.tile-title Identify
+                    .row.tile-row
+                        h4.tile-text Identify controls in the wireframe
+                .col-md-3
+                    .crop-model-box
+                        div(ng-show='cropper.croppedImage!=null')
+                            img(ng-src='{{cropper.croppedImage}}', width='175px', height='175px')
+                .col-md-3
+                    h5 Control data
+                    .form-group.train-form
+                        label(for='inputText') Image Text
+                        input#inputText.form-control.form-control-upload(type='text', placeholder='Image Text', ng-model='controlText')
+                        label(for='labelSelect') Control Type *
+                        select#labelSelect.form-control.form-control-upload(ng-model='controlLabel')
+                            option Text
+                            option Button
+                            option Chart
+                            option Image
+                            option Icon
+                            option Table
+                        button.btn.btn-primary.upload-ctrl-btn.form-control-upload(ng-click="uploadCropedImage(cropper.croppedImage, controlText, controlLabel, findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom))") Submit Control
+            .row.info-row
+                .col-md-12
+                    canvas#canvas(width='1024', height='1024', image-cropper='',
+                    image='cropper.sourceImage', cropped-image='cropper.croppedImage',
+                    crop-width='findSize(bounds.left, bounds.right)', crop-height='findSize(bounds.top, bounds.bottom)', min-width='10', min-height='10',
+                    keep-aspect='false', crop-area-bounds='bounds')
+        .row.upload-section
+            .col-md-2
+                button.btn.btn-create(href='/contribute/list') Control list
+            .col-md-2
+                button.btn.btn-create(href='/modellist') Download List

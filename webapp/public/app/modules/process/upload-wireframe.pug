@@ -1,6 +1,9 @@
 //
    Created by subhasis on 11/1/16.
 .container
+    .row
+        .col-md-10
+            h2.train-title Generate A Prototype
     .row.upload-section.tile
         form(name="modelDataUpload")
             .col-md-1
@@ -46,13 +49,13 @@
                 .col-md-5
                     .form-group
                         label(for='inputText') Title *
-                        input#inputText.form-control(type='text', placeholder='Wireframe Title', ng-model='wireframeTitle')
+                        input#inputText.form-control.form-control-upload(type='text', placeholder='Wireframe Title', ng-model='wireframeTitle')
                         label(for='labelSelect') Privacy *
-                        select#labelSelect.form-control(ng-model='acessType')
+                        select#labelSelect.form-control.form-control-upload(ng-model='acessType')
                             option Public
                             option Private
                         label Dimensions
-                        p.form-control.disabled Width : {{findSize(bounds.left, bounds.right)}} px &nbsp; Height : {{findSize(bounds.top, bounds.bottom)}} px
+                        p.form-control.form-control-upload.disabled Width : {{findSize(bounds.left, bounds.right)}} px &nbsp; Height : {{findSize(bounds.top, bounds.bottom)}} px
     .row.upload-section
         .col-md-11
             button.btn.btn-save(ng-click="uploadCropedImage(cropper.croppedImage, findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom), acessType, wireframeTitle)") Next

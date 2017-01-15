@@ -1,40 +1,23 @@
-//
-   Created by subhasis on 11/1/16.
 .container
-    .row
-        .col-md-10
-            h2 Wireframe - {{wireframeMetadata.title}}
-            h3 Step 2 - Mark all the Controls to be identified in the Wireframe.
-    .row
-        form.form-horizontal.row(name="modelDataUpload")
-            .col-md-6
-                .form-group
-                    label(for='inputText') Wireframe Title *
-                    input#inputText.form-control(type='text', placeholder='Wireframe Title', ng-model='wireframeMetadata.title')
-                .col-md-6
-                    label(for='labelSelect') Identify Acess Type *
-                        select#labelSelect.form-control(ng-model='wireframeMetadata.acessType')
-                            option Public
-                            option Private
-                    button.btn.btn-primary.home-button(ng-click="saveEdit()") Save Changes
-                    br
-                    button.btn.btn-primary.home-button(ng-click="createZip()") Create a Zip of the Page & Controls
-                    br
-                    //button.btn.btn-primary.home-button(ng-click="analyzePrototype()") Generate Prototype
-            .col-md-6
-                .crop-model-box
-                    div(ng-show='cropper.croppedImage!=null')
-                        img(ng-src='{{cropper.croppedImage}}', width='200px', height='200px')
-                div
-                    h5 Cropped Image Dimention
-                    | Position: Top - Left: ({{bounds.left}}, {{wireframeMetadata.wireframe_height - bounds.top}}) Bottom - Right: ({{bounds.right}},{{ wireframeMetadata.wireframe_height - bounds.bottom}})
-                    br
-                    | Width : {{findSize(bounds.left, bounds.right)}} px &nbsp;
-                    | Height : {{findSize(bounds.top, bounds.bottom)}} px
-                button.btn.btn-primary.home-button(ng-click="cropSelectedImage(cropper.croppedImage, bounds, wireframeMetadata.wireframe_height)") Crop Image as Control
-    .row
+    .row.upload-section.tile
+        .col-md-1
+            h1.section-number 4
+        .col-md-4
+            .row.tile-row
+                h2.tile-title Identify
+            .row.tile-row
+                h4.tile-text Identify controls in the wireframe
+        .col-md-3
+            .crop-model-box
+                div(ng-show='cropper.croppedImage!=null')
+                    img(ng-src='{{cropper.croppedImage}}', width='175px', height='175px')
+        .cold-md-3
+            h5 Crop data
+            p Position: ({{bounds.left}}, {{wireframeMetadata.wireframe_height - bounds.top}})
+            p Width : {{findSize(bounds.left, bounds.right)}} px
+            p Height : {{findSize(bounds.top, bounds.bottom)}} px
+            button.btn.btn-primary.upload-ctrl-btn(ng-click="cropSelectedImage(cropper.croppedImage, bounds, wireframeMetadata.wireframe_height)") Save Control
         .col-md-12
-            h5 Please Refresh Page If Canvas does not load the wireframe.
             div#canvas-annotate-box
                 canvas#canvas-annotate(width='1024', height='1024', image-cropper='',
                 image='cropper.sourceImage', cropped-image='cropper.croppedImage',
@@ -42,58 +25,48 @@
                 min-width='10', min-height='10',
                 keep-aspect='false', crop-area-bounds='bounds')
     .row
+        .col-md-10.col-md-offset-1.upload-separator
+    .row.upload-section.tile
         .col-md-12
             table.table.table-hover.table-striped.table-condensed
                 thead
                     tr
                         th Control
-                        th Upload Date
-                        th Control Dimention
-                        th Control Position
-                        th Status
-                        th Actual Lavel
-                        th Actual Text
-                        th Predicted Lable
-                        th Predicted Text
+                        //th Upload Date
+                        th Width
+                        td Height
+                        th Position
+                        //th Status
+                        //th Actual Lavel
+                        //th Actual Text
+                        //th Predicted Lable
+                        //th Predicted Text
                         th Remove
                 tbody
                     tr(ng-repeat="data in wireframeMetadata.controls | orderBy:-uploaded_on")
                         td
                             img.model-image-box(ng-src='/api/page/image/{{data._id}}?ts=50')
-                        td {{data.uploaded_on | date}}
-                        td Width: {{data.object_width}} , Height: {{data.object_height}}
-                        td Top-Left-X: {{data.image_dimention.top_left_x}} , Top-Left-Y: {{data.image_dimention.top_left_y}}, Bottom-Right-X: {{data.image_dimention.bottom_right_x}} , Bottom-Right-Y: {{data.image_dimention.bottom_right_y}}
-                        td {{data.status}}
-                        td {{data.actual_label}}
-                        td {{data.actual_text}}
-                        td(ng-hide='data.googleAvailable')
-                            button.btn.btn-primary(ng-click="analyzeGoogleVision(data._id)") Get Text
-                        td(ng-show='data.googleAvailable')
-                            a(href='/api/getGoogleVisionResponse/{{data._id}}',target='_blank') JSON Response
-                            br
-                            | Text - {{data.prediction_text_google}}
-                        td(ng-hide='data.ibmWatsonAvailable')
-                            button.btn.btn-primary(ng-click="analyzeIBMWatson(data._id)") Get Label
-                        td(ng-show='data.ibmWatsonAvailable')
-                            a(href='/api/getIBMWatsonResponse/{{data._id}}',target='_blank') JSON Response
-                            br
-                            | Label - {{data.prediction_label_ibm}}
-                        //td(ng-if='data.prediction_label.length === 0')
-                        //|   &nbsp;
-                        //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_label")
-                        //|   {{item.provider}} -- {{item.result}}
-                        //td(ng-if='data.prediction_text.length === 0')
-                        //|   &nbsp;
-                        //td(ng-if='data.prediction_label.length > 0', ng-repeat="item in data.prediction_text")
-                        //|   {{item.provider}} -- {{item.result}}
+                        //td {{data.uploaded_on | date}}
+                        td Width: {{data.object_width}}
+                        td Height: {{data.object_height}}
+                        td ({{data.image_dimention.top_left_x}}, {{data.image_dimention.top_left_y}})
+                        //td {{data.status}}
+                        //td {{data.actual_label}}
+                        //td {{data.actual_text}}
+                        //td(ng-hide='data.googleAvailable')
+                        //    button.btn.btn-primary(ng-click="analyzeGoogleVision(data._id)") Get Text
+                        //td(ng-show='data.googleAvailable')
+                        //    a(href='/api/getGoogleVisionResponse/{{data._id}}',target='_blank') JSON Response
+                        //    br
+                        //    | Text - {{data.prediction_text_google}}
+                        //td(ng-hide='data.ibmWatsonAvailable')
+                        //    button.btn.btn-primary(ng-click="analyzeIBMWatson(data._id)") Get Label
+                        //td(ng-show='data.ibmWatsonAvailable')
+                        //    a(href='/api/getIBMWatsonResponse/{{data._id}}',target='_blank') JSON Response
+                        //    br
+                        //    | Label - {{data.prediction_label_ibm}}
                         td
                             button.btn.btn-primary(ng-click="deleteControl(data._id)") X
-    .row
-        .col-md-12
-            //div(ng-show='wireframeMetadata.controls.length > 0')
-            div
-                button.btn.btn-danger(ng-click="analyzeAllControls()") Analyze controls
-
-
-
-
+    .row.upload-section
+        .col-md-11
+            button.btn.btn-create(ng-click="analyzeAllControls()") Create Preview

@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+@font-face {
+  font-family: 'sketch';
+  src: url("fonts/KGTenThousandReasonsAlt.ttf");
+}
 body {
   padding-top: 69px;
   background-color: #f7f7f7;
@@ -20,7 +24,7 @@ a.navbar-link {
   color: #fff;
   background-color: #073053;
   transition: all 0.2s;
-  margin: 0 5px;
+  margin: 0 15px;
 }
 ul.nav>li>a.navbar-link:hover,
 ul.nav>li>a.navbar-link:active,
@@ -89,9 +93,10 @@ footer {
   margin-bottom: 10px;
 }
 .crop-model-box {
-  border: 2px;
+  border: 2px solid #ccc;
   width: 200px;
   height: 200px;
+  margin-bottom: 25px;
 }
 .model-image-box {
   border: 2px;
@@ -211,7 +216,7 @@ div.upload-separator {
 div.info-row {
   padding: 10px 25px;
 }
-.form-control {
+.form-control-upload {
   margin-bottom: 15px;
 }
 .form-control.disabled {
@@ -222,4 +227,61 @@ div.info-row {
   background-color: #f06b50;
   margin-left: 20px;
   width: 100px;
+}
+.btn-create {
+  color: #fff;
+  background-color: #f06b50;
+  margin-left: 20px;
+  width: 150px;
+}
+.upload-ctrl-btn {
+  color: #fff;
+}
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+  vertical-align: middle !important;
+}
+canvas {
+  margin: auto auto;
+}
+.train-title {
+  margin-bottom: 40px;
+}
+.sketch {
+  font-family: 'sketch', Sans-Serif;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: 150px;
+}
+.sketch-jumbo {
+  height: 100vh;
+  width: 100%;
+  color: #fff;
+  background-color: #1a242f;
+  padding: 0 !important;
+}
+.star-wrapper {
+  background: url("../assets/Animated-stars.gif"), #1a242f;
+  opacity: 0;
+  transition: all 1s ease;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+}
+.star-wrapper:hover,
+.star-wrapper:visited,
+.star-wrapper:focus {
+  opacity: 1;
+}
+.type {
+  opacity: 0;
+  transition: all 1s ease;
+}
+.type:hover {
+  opacity: 1;
 }
