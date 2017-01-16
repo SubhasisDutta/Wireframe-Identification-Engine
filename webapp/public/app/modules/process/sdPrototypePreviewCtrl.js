@@ -38,11 +38,17 @@ function sdPrototypePreviewCtrl($scope, sdPrototypePreviewData) {
         var normHeight = (canvas.offsetHeight / wfHeight) * height;
         var normLeft = (canvas.offsetWidth / wfWidth) * left;
         var normTop = (canvas.offsetHeight / wfHeight) * top;
+        // return {
+        //     width: normWidth,
+        //     height: normHeight,
+        //     left: normLeft,
+        //     top: normTop
+        // }
         return {
-            width: normWidth,
-            height: normHeight,
-            left: normLeft,
-            top: normTop
+            width: width,
+            height: height,
+            left: left,
+            top: top
         }
     }
 

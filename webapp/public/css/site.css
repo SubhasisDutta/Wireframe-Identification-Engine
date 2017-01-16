@@ -130,8 +130,8 @@ div.preview-canvas-wrapper {
 }
 .preview-canvas {
   border: 1px solid #ccc;
-  width: 1000px;
-  height: 1000px;
+  width: 900px;
+  height: 900px;
   margin: 2% auto;
   box-shadow: 10px 10px 5px #ccc;
   background-color: #fff;
