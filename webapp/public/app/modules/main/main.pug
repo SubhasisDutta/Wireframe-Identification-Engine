@@ -1,29 +1,46 @@
+//.sketch-jumbo
+//  .star-wrapper
+//  .container
+//    .jumbotron
+//      h3.sketch Imagine a world where anyone could build beautiful apps with the push of a button...
+//      h3.type Imagine a world where anyone could build beautiful apps with the push of a button...
 .container
-  .jumbotron
-    h1 Wireframe Identification Engine
-    p
-      | Welcome to WIE! This tool is a concept demonstrator to semi-autonomously convert a wireframe design image
-      | to user interface code. By identifying the different user interface controls using various machine learning techniques
-      | and converting them to usable metadata which can be used on platform like
-      strong
-        a(href='//build.me' target='_blank')  SAP's BUILD
-      |  to generate freestyle prototype.
-      | Using this app a user can build training models by collecting data and constantly improve the
-      | classifier through reinforcement learning.
-    strong
-      ul
-        li
-          a(href='/public') Check out the Public Pages in which the position of the controls have been identified
-        li
-          a(href='/contribute/list') Analyze an image to identify the type/label and text written.
-        li
-          a(href='/contribute/upload') Upload wireframe and label controls for training data curation.
-          |  &nbsp;(Requires Login)
-        li
-          a(href='/modellist') Download image data sets for building training models.
-          | &nbsp;(Requires Login)
-        li
-          a(href='/process/upload') Upload an image and mark the controls you want to extract and identify.
-          | &nbsp;(Requires Login)
-        li
-          a(href='//github.com/SubhasisDutta/WireframeTagging' target='_blank') GITHUB : github.com/SubhasisDutta/WireframeTagging
+  .row
+    .col-md-10.col-md-offset-1
+      h4.sketch Imagine a world where anyone could build beautiful apps with the push of a button...
+  .row
+    a.col-md-3.tile(href='/process/upload')
+      .tile-row
+        img.tile-img(src='../../../assets/convert2.png')
+      .row.tile-row
+        h2.tile-title Convert
+      .row.tile-row
+        p.tile-text Convert a paper prototype to a high fidelity prototype
+    a.col-md-3.tile(href='/contribute/upload')
+      .tile-row
+        img.tile-img(src='../../../assets/train.png')
+      .row.tile-row
+        h2.tile-title Train
+      .row.tile-row
+        p.tile-text Use machine learning to help improve accuracy
+    a.col-md-3.tile(href='/pages')
+      .tile-row
+        img.tile-img(src='../../../assets/prototypes.png')
+      .row.tile-row
+        h2.tile-title Prototypes
+      .row.tile-row
+        p.tile-text View the prototypes you have contributed
+    a.col-md-3.tile(href='/pages')
+      .tile-row
+        img.tile-img(src='../../../assets/public.png')
+      .row.tile-row
+        h2.tile-title Public
+      .row.tile-row
+        p.tile-text View the public prototypes contributed by others
+    a.col-md-3.tile(href='//github.com/SubhasisDutta/WireframeTagging' target='_blank')
+      .tile-row
+        img.tile-img(src='../../../assets/github.png')
+      .row.tile-row
+        h2.tile-title Github
+      .row.tile-row
+        p.tile-text Check out some of the project documentation

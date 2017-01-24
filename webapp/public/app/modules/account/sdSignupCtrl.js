@@ -15,7 +15,7 @@ function sdSignupCtrl($scope, sdUser, sdNotifier, $location, sdAuth) {
             sdNotifier.notify('User account created!');
             $location.path('/');
         }, function (reason) {
-            sdNotifier.error(reason);
+            sdNotifier.notify(reason);
         });
     }
 }

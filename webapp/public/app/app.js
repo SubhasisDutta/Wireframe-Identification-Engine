@@ -2,6 +2,7 @@
 
 global.jQuery = require('jquery');
 
+require('jquery');
 require('bootstrap');
 
 require('angular');
@@ -78,6 +79,10 @@ app.config(function ($routeProvider, $locationProvider) {
         .when('/rebuild', {
             templateUrl: '/partials/train/rebuild-model',
             controller: 'sdRebuildCtrl', resolve: routeRoleChecks.admin
+        })
+        .when('/prototypepreview', {
+            templateUrl: '/partials/process/prototype-preview',
+            controller: 'sdPrototypePreviewCtrl', resolve: routeRoleChecks.user
         })
         .when('/process/upload', {
             templateUrl: '/partials/process/upload-wireframe',

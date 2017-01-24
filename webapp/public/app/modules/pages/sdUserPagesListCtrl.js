@@ -5,7 +5,7 @@
 
 module.exports = sdUserPagesListCtrl;
 
-function sdUserPagesListCtrl ($scope, sdIdentity, $resource, sdNotifier, $location) {
+function sdUserPagesListCtrl ($scope, sdIdentity, $resource, sdNotifier, $location, $window) {
     $scope.perPage = 20;
     $scope.maxSize = 5;
 
@@ -41,6 +41,6 @@ function sdUserPagesListCtrl ($scope, sdIdentity, $resource, sdNotifier, $locati
     };
 
     $scope.editControl = function(wireframeId) {
-        $location.path('/process/annotate/' + wireframeId);
+        $window.location.href = '/process/annotate/' + wireframeId;
     };
 }

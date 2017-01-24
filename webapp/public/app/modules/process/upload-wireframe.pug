@@ -3,32 +3,29 @@
 .container
     .row
         .col-md-10
-            h2 Upload an Wireframe to identify Controls
-            h3 Step 1 - Upload an Image and Crop the area to be considered as Wireframe.
-    form.form-horizontal.row(name="modelDataUpload")
-        .col-md-6
-            div
-                .form-group
-                    label(for='InputFile') Source Image
-                    input#inputFile.btn.btn-primary(type='file', img-cropper-fileread='',
-                    image='cropper.sourceImage')
-                    p.help-block Upload a Wireframe.
-
-                div
-                    h5 Cropped Image Dimention
-                    | Width : {{findSize(bounds.left, bounds.right)}} px &nbsp;
-                    | Height : {{findSize(bounds.top, bounds.bottom)}} px
-                button.btn.btn-primary.home-button(ng-click="uploadCropedImage(cropper.croppedImage," +
-                " findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom), acessType, wireframeTitle)") Upload
-        .col-md-6
-            .form-group
-                label(for='inputText') Wireframe Title *
-                input#inputText.form-control(type='text', placeholder='Wireframe Title', ng-model='wireframeTitle')
-            label(for='labelSelect') Identify Acess Type *
-                select#labelSelect.form-control(ng-model='acessType')
-                    option Public
-                    option Private
+            h2.train-title Generate A Prototype
+    .row.upload-section.tile
+        form(name="modelDataUpload")
+            .col-md-1
+                h1.section-number 1
+            .col-md-8
+                .row.tile-row
+                    h2.tile-title Upload
+                //.tile-row
+                //    img.tile-img-convert(src='../../../assets/illu_prototype.svg')
+                .row.tile-row
+                    h5.tile-text Upload your wireframe image
+                    input#inputFile(type='file', img-cropper-fileread='', image='cropper.sourceImage')
     .row
+        .col-md-10.col-md-offset-1.upload-separator
+    .row.upload-section.tile
+        .col-md-1
+            h1.section-number 2
+        .col-md-4
+            .row.tile-row
+                h2.tile-title Crop
+            .row.tile-row
+                h4.tile-text Crop the image to your wireframe
         .col-md-12
             div
                 canvas#canvas(width='1024', height='1024', image-cropper='',
@@ -36,3 +33,29 @@
                 crop-width='findSize(bounds.left, bounds.right)', crop-height='findSize(bounds.top, bounds.bottom)',
                 min-width='200', min-height='200',
                 keep-aspect='false', crop-area-bounds='bounds')
+    .row
+        .col-md-10.col-md-offset-1.upload-separator
+    .row.upload-section.tile
+        form(name="modelDataUpload")
+            .row.info-row
+                .col-md-1
+                    h1.section-number 3
+                .col-md-10
+                    .row.tile-row
+                        h2.tile-title Info
+                    .row.tile-row
+                        h5.tile-text Edit wireframe info and settings
+            .row.info-row
+                .col-md-5
+                    .form-group
+                        label(for='inputText') Title *
+                        input#inputText.form-control.form-control-upload(type='text', placeholder='Wireframe Title', ng-model='wireframeTitle')
+                        label(for='labelSelect') Privacy *
+                        select#labelSelect.form-control.form-control-upload(ng-model='acessType')
+                            option Public
+                            option Private
+                        label Dimensions
+                        p.form-control.form-control-upload.disabled Width : {{findSize(bounds.left, bounds.right)}} px &nbsp; Height : {{findSize(bounds.top, bounds.bottom)}} px
+    .row.upload-section
+        .col-md-11
+            button.btn.btn-save(ng-click="uploadCropedImage(cropper.croppedImage, findSize(bounds.left, bounds.right), findSize(bounds.top, bounds.bottom), acessType, wireframeTitle)") Next

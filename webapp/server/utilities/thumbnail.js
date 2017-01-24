@@ -4,11 +4,15 @@ exports.createSquareThumbnail = function(sourceLocation,targetLocation,sourceFil
     var sourceImage = sourceLocation + '/' + sourceFileName;
     var targetImage = targetLocation + '/' + size + '_' + sourceFileName;
     lwip.open(sourceImage, function(err, image){
-       if(err) console.log('Image Open error');
-       image.resize(size, size, function(err, image) {
-           image.writeFile(targetImage, function(err) {
-               if(err) console.log('Error in writing file :' + targetImage);
+       if(err)  {
+           console.log('Image Open error');
+       }
+       if(image) {
+           image.resize(size, size, function(err, image) {
+               image.writeFile(targetImage, function(err) {
+                   if(err) console.log('Error in writing file :' + targetImage);
+               })
            })
-       })
+       }
     });
 };
